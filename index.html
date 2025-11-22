@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChemCoreAI - Advanced Chemical Data Extraction</title>
+    <style>
+        /* --- General Styling --- */
+        :root {
+            --primary-color: #007BFF; /* A clean, scientific blue */
+            --secondary-color: #28a745; /* A complementary green for highlights/buttons */
+            --background-color: #f8f9fa; /* Light grey/off-white */
+            --text-color: #343a40; /* Dark grey for body text */
+            --header-color: #212529; /* Near black for headings */
+            --font-family: 'Inter', sans-serif; /* Using Inter for clean, modern look */
+        }
+
+        body {
+            font-family: var(--font-family);
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            width: 90%; /* More fluid width for responsiveness */
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        h1, h2, h3 {
+            color: var(--header-color);
+            margin-bottom: 15px;
+        }
+        
+        h2 {
+            font-size: 2.5em;
+        }
+
+        /* Rounded corners for a modern feel */
+        .rounded-lg {
+            border-radius: 12px;
+        }
+
+        /* --- Header/Navigation --- */
+        header {
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            padding: 8px 0;
+            transition: color 0.3s, border-bottom 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), #0056b3);
+            color: white;
+            text-align: center;
+            padding: 120px 20px;
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            color: white;
+            font-size: clamp(2.5em, 5vw, 4em); /* Responsive font size */
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: clamp(1.1em, 2vw, 1.4em);
+            max-width: 800px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 14px 35px;
+            text-decoration: none;
+            border-radius: 8px; /* Slightly rounded */
+            font-size: 1.2em;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-button:hover {
+            background-color: #1e7e34;
+            transform: translateY(-2px);
+        }
+
+        /* --- Services Section --- */
+        .services {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .service-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            text-align: left;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .card h3 {
+            font-size: 1.4em;
+            margin-top: 0;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* --- Contact Section --- */
+        #contact form {
+            background: white;
+            padding: 30px;
+            max-width: 600px;
+            margin: 30px auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            text-align: left;
+        }
+
+        #contact input, #contact textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        #contact input:focus, #contact textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--header-color);
+            color: #ccc;
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 60px;
+            font-size: 0.9em;
+        }
+
+        footer a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        /* --- Mobile Responsiveness --- */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 80px 15px;
+            }
+
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            .card {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            nav ul {
+                display: none; /* Hide standard nav on small screens, usually replaced by a burger menu */
+            }
+
+            nav {
+                display: block;
+                text-align: center;
+            }
+
+            .logo {
+                display: block;
+                padding: 10px 0;
+            }
+
+            .services {
+                padding: 40px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header/Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#home" class="logo">ChemCore**AI**</a>
+                <!-- Simple navigation for desktop -->
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>**Core Intelligence** from Chemical Data.</h1>
+            <p>Leveraging cutting-edge **AI** to extract actionable insights from complex chemical process data and molecular structures for QSAR/QSPR.</p>
+            <a href="#contact" class="cta-button">Start Your Project Today</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2>Our Core Expertise</h2>
+            <div class="service-cards">
+                <!-- Service Card 1: Process Data -->
+                <div class="card rounded-lg">
+                    <h3>🔬 Chemical Process Optimization</h3>
+                    <p>We extract features and predict outcomes from **batch and continuous process data**. Identify key reaction parameters and bottlenecks using **Machine Learning** for efficiency gains.</p>
+                </div>
+                
+                <!-- Service Card 2: Molecular Data (QSAR) -->
+                <div class="card rounded-lg">
+                    <h3>⚛️ Molecular Property Prediction (QSAR/QSPR)</h3>
+                    <p>Automated feature generation from **molecular structures** (SMILES, InChI, etc.) to build highly predictive models for toxicity, efficacy, and physical properties.</p>
+                </div>
+                
+                <!-- Service Card 3: Data Strategy -->
+                <div class="card rounded-lg">
+                    <h3>📈 Data Integration & Strategy</h3>
+                    <p>Harmonize disparate chemical datasets, apply advanced statistical and **AI models**, and visualize results for clear, data-driven decision-making across R&D.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="container" style="padding: 40px 0; text-align: center;">
+        <h2>About ChemCoreAI</h2>
+        <p style="max-width: 900px; margin: 0 auto; font-size: 1.1em;">We are a dedicated team of data scientists, software engineers, and cheminformaticians committed to revolutionizing chemical discovery. Our focus is on bridging the gap between raw scientific data and actionable business intelligence, delivering tools and insights that accelerate innovation in pharmaceuticals and materials science.</p>
+        <hr style="margin-top: 40px; border-color: #ddd;">
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="container" style="text-align: center;">
+        <h2>Get in Touch</h2>
+        <p>Ready to unlock the potential of your chemical data? Contact us to discuss your specific needs.</p>
+        
+        <!-- Contact Form -->
+        <form class="rounded-lg">
+            <div style="margin-bottom: 15px;">
+                <label for="name" style="display: block; margin-bottom: 5px; font-weight: 500;">Name:</label>
+                <input type="text" id="name" name="name" required class="rounded-lg">
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="email" style="display: block; margin-bottom: 5px; font-weight: 500;">Email:</label>
+                <input type="email" id="email" name="email" required class="rounded-lg">
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="message" style="display: block; margin-bottom: 5px; font-weight: 500;">Message:</label>
+                <textarea id="message" name="message" rows="5" required class="rounded-lg"></textarea>
+            </div>
+            <!-- The submit button uses the same style as the CTA -->
+            <button type="submit" class="cta-button" style="width: 100%; border: none;">Send Inquiry</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 ChemCoreAI. All rights reserved.</p>
+            <p>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="mailto:info@chemcoreai.com">info@chemcoreai.com</a>
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
