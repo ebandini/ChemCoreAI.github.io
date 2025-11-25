@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChemCoreAI - Intelligence for Chemical Innovation</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
-    <style>
+    
+    <!-- Favicon removed --><style>
         /* --- General Styling --- */
         :root {
             --primary-color: #5a8cff; /* A vibrant, modern blue */
@@ -73,16 +74,23 @@
             border-bottom: 1px solid rgba(90, 140, 255, 0.1);
         }
 
-        .logo {
+        /* .header-logo removed */
+        .logo-text {
             font-size: 2em;
             font-weight: 700;
             color: var(--lighter-text);
             text-decoration: none;
             transition: color 0.3s ease;
         }
-        .logo:hover {
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        .logo-link:hover .logo-text {
             color: var(--primary-color);
         }
+
 
         nav {
             display: flex;
@@ -201,7 +209,9 @@
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
         }
 
-        /* --- Services Section --- */
+        /* --- Banner Section removed --- */
+
+        /* --- Capabilities Section --- */
         .services h2, .case-studies h2, .about h2, .contact h2 {
             position: relative;
             padding-bottom: 15px;
@@ -429,7 +439,9 @@
     <!-- Header/Navigation --><header>
         <div class="container">
             <nav>
-                <a href="#home" class="logo">ChemCore<span class="text-gradient">AI</span></a>
+                <a href="#home" class="logo-link">
+                    <!-- Text logo only --><span class="logo-text">ChemCore<span class="text-gradient">AI</span></span>
+                </a>
                 <ul>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#services">Capabilities</a></li>
@@ -443,15 +455,15 @@
 
     <!-- Hero Section --><section id="home" class="hero animated-section">
         <div class="container">
-            <h1>Data-Driven <span class="text-gradient">Intelligence</span> for Chemical R&D.</h1>
-            <p>Applying advanced machine learning and cheminformatics to extract predictive insights from complex chemical, process, and structural data for accelerated discovery and optimization.</p>
+            <h1>Data-Driven <span class="text-gradient">Intelligence</span> for Chemistry.</h1>
+            <p>Applying machine learning and cheminformatics to extract predictive insights from chemical, process, and structural data for accelerated discovery and optimization.</p>
             <a href="#contact" class="cta-button">Schedule a Consultation</a>
         </div>
     </section>
 
-    <!-- Capabilities Section --><section id="services" class="services animated-section">
+    <!-- Banner Section Removed --><!-- Capabilities Section --><section id="services" class="services animated-section">
         <div class="container">
-            <h2>Our Core Capabilities</h2>
+            <h2>Our Capabilities</h2>
             <div class="service-cards">
                 <!-- Service Card 1: Process Data --><div class="card">
                     <h3>🔬 Process Informatics & Optimization</h3>
@@ -459,13 +471,13 @@
                 </div>
                 
                 <!-- Service Card 2: Molecular Data (QSAR) --><div class="card">
-                    <h3>⚛️ QSAR/QSPR Modeling</h3>
-                    <p>Develop robust predictive models for molecular properties (e.g., efficacy, toxicity) by generating high-quality descriptors from structural data (SMILES, InChI).</p>
+                    <h3>⚛️ QSAR/QSRR Modeling</h3>
+                    <p>Develop predictive models for molecular properties (e.g., toxicity, chromatographic retention).</p>
                 </div>
                 
                 <!-- Service Card 3: Data Strategy --><div class="card">
                     <h3>📊 Data Strategy & Architecture</h3>
-                    <p>Design and deploy scalable data pipelines and visualization tools that integrate disparate chemical datasets, enabling real-time, informed decision-making.</p>
+                    <p>Design and deploy scalable data pipelines and visualization tools that integrate chemical datasets, enabling informed decision-making.</p>
                 </div>
             </div>
         </div>
@@ -477,12 +489,12 @@
             <p class="case-studies-intro">Our commitment to practical results is demonstrated through successful projects across drug discovery and manufacturing. Explore how we delivered predictive power to our clients.</p>
             <div class="case-study-grid">
                 <div class="study-placeholder">
-                    <h3 class="text-gradient">Accelerated Lead Optimization</h3>
-                    <p>Reduced drug candidate screening time by 40% using validated ML-driven ADMET prediction models.</p>
+                    <h3 class="text-gradient">HPLC retention time prediction and mechanism elucidation</h3>
+                    <p>Reduced HPLC method development using ML models.</p>
                 </div>
                 <div class="study-placeholder">
-                    <h3 class="text-gradient">Manufacturing Yield Forecast</h3>
-                    <p>Implemented process AI to forecast final API yield with 98% accuracy based on upstream sensor data, minimizing material waste.</p>
+                    <h3 class="text-gradient">Manufacturing Process Optimization</h3>
+                    <p>Implemented process to understand and solve issues in production.</p>
                 </div>
             </div>
             <a href="#contact" class="cta-button contact-cta">Request Portfolio Access</a>
@@ -492,8 +504,8 @@
 
     <!-- About Section --><section id="about" class="about animated-section">
         <div class="container">
-            <h2>Pioneering the Future of Chemistry</h2>
-            <p>ChemCoreAI is a specialized firm focused on the practical application of AI in chemistry, pharmaceuticals, and materials science. Our multidisciplinary team combines deep domain expertise with data science to build custom, validated models that solve industry-specific R&D challenges and deliver measurable business value.</p>
+            <h2>Bringing together science and AI</h2>
+            <p>ChemCoreAI is a specialized firm focused on the practical application of AI in chemistry, pharmaceuticals, and materials science. Our team combines expertise in chemistry and artificial intelligence to build custom, validated models that solve specific challenges and deliver measurable business value.</p>
             <p class="vision">"Our mission is to convert complex chemical data into reliable, actionable intelligence."</p>
         </div>
     </section>
