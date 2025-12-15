@@ -8,6 +8,7 @@
     
     <!-- FIX: Added favicon link. Assuming 'favicon.ico' or 'logo.png' is in the root directory. -->
     <link rel="icon" type="image/x-icon" href="logo.png"> 
+    <!-- If you prefer the JPG you uploaded, use: <link rel="icon" type="image/jpeg" href="logo.jpg"> -->
     
     <style>
         /* --- General Styling --- */
@@ -77,6 +78,7 @@
             border-bottom: 1px solid rgba(90, 140, 255, 0.1);
         }
 
+        /* .header-logo removed */
         .logo-text {
             font-size: 2em;
             font-weight: 700;
@@ -211,14 +213,15 @@
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
         }
 
+        /* --- Banner Section removed --- */
+
         /* --- Capabilities Section --- */
-        /* Updated CSS Selectors for consistency: .case-studies -> .implemented-solutions */
-        .services h2, .implemented-solutions h2, .about h2, .contact h2 {
+        .services h2, .case-studies h2, .about h2, .contact h2 {
             position: relative;
             padding-bottom: 15px;
             margin-bottom: 60px;
         }
-        .services h2::after, .implemented-solutions h2::after, .about h2::after, .contact h2::after {
+        .services h2::after, .case-studies h2::after, .about h2::after, .contact h2::after {
             content: '';
             position: absolute;
             left: 50%;
@@ -281,20 +284,19 @@
             color: var(--light-text);
         }
 
-        /* --- Implemented Solutions Section Styles (Updated from Case Studies) --- */
-        .implemented-solutions .implemented-solutions-intro {
+        /* --- Case Studies Section --- */
+        .case-studies .case-studies-intro {
             max-width: 900px;
             margin: 0 auto 50px;
             font-size: 1.15em;
             text-align: center;
         }
 
-        .solution-grid {
+        .case-study-grid {
             display: grid;
-            /* UPDATED: Use repeat(auto-fit) for flexible 2/3 column layout, matching service cards */
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            grid-template-columns: 1fr 1fr;
             gap: 30px;
-            max-width: 1300px; /* Use full container width */
+            max-width: 900px;
             margin: 0 auto 50px;
         }
 
@@ -303,39 +305,12 @@
             border: 1px solid var(--border-color);
             border-radius: 10px;
             padding: 30px;
-            text-align: left; /* Changed to left align content */
-            transition: background 0.3s, transform 0.4s, box-shadow 0.4s;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: background 0.3s;
         }
         .study-placeholder:hover {
             background: #33334f;
-            transform: translateY(-5px); /* Added hover effect */
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
-        .study-placeholder h3 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-        }
-        .study-placeholder p {
-            margin-bottom: 15px;
-            font-size: 1em;
-        }
-        .study-links {
-            margin-top: 20px;
-            font-size: 0.9em;
-            line-height: 1.5;
-        }
-        .study-links a {
-            color: var(--secondary-color);
-            text-decoration: underline;
-            transition: color 0.3s;
-            display: block; /* Make links stackable */
-        }
-        .study-links a:hover {
-            color: var(--primary-color);
-        }
-
-        /* .contact-cta class is now redundant as the button is removed, but keeping the rule just in case it's used elsewhere. */
         .contact-cta {
             margin: 0 auto;
             display: block;
@@ -361,33 +336,6 @@
             font-style: italic;
             color: rgba(255, 255, 255, 0.7);
         }
-        /* New styles for the Founder Bio */
-        .founder-card {
-            background: var(--mid-dark-bg);
-            border-radius: 15px;
-            padding: 40px;
-            max-width: 650px;
-            margin: 50px auto 0;
-            text-align: center;
-            border: 1px solid var(--secondary-color);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-        }
-        .founder-card h3 {
-            margin-bottom: 5px;
-            color: var(--primary-color);
-        }
-        .founder-card .founder-title {
-            color: var(--secondary-color);
-            font-size: 1.1em;
-            margin-bottom: 20px;
-            display: block;
-            font-weight: 500;
-        }
-        .founder-card p {
-            font-size: 1em;
-            text-align: left;
-        }
-
 
         /* --- Contact Section --- */
         #contact form {
@@ -452,7 +400,7 @@
             color: var(--primary-color);
             text-decoration: none;
             margin: 0 15px;
-            transition: color 0.3s;
+            transition: color 0.3s ease;
         }
 
         footer a:hover {
@@ -486,129 +434,92 @@
             .card { padding: 30px; }
             h2 { font-size: 2em; margin-bottom: 40px; }
             section { padding: 60px 0; }
-            .solution-grid { grid-template-columns: 1fr; }
+            .case-study-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header/Navigation -->
-    <header>
+    <!-- Header/Navigation --><header>
         <div class="container">
             <nav>
                 <a href="#home" class="logo-link">
-                    <!-- Text logo only -->
-                    <span class="logo-text">ChemCore<span class="text-gradient">AI</span></span>
+                    <!-- Text logo only --><span class="logo-text">ChemCore<span class="text-gradient">AI</span></span>
                 </a>
                 <ul>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#services">Capabilities</a></li>
-                    <!-- UPDATED: Anchor to #implemented-solutions for consistency -->
-                    <li><a href="#implemented-solutions">Implemented Solutions</a></li>
-                    <li><a href="#about">About Me</a></li>
+                    <li><a href="#case-studies">Case Studies</a></li>
+                    <li><a href="#about">About Us</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero animated-section">
+    <!-- Hero Section --><section id="home" class="hero animated-section">
         <div class="container">
-            <h1>Data-Driven <span class="text-gradient">Intelligence</span> for Chemistry</h1>
+            <h1>Data-Driven <span class="text-gradient">Intelligence</span> for Chemistry.</h1>
             <p>Applying machine learning and cheminformatics to extract predictive insights from chemical, process, and structural data for accelerated discovery and optimization.</p>
             <a href="#contact" class="cta-button">Schedule a Consultation</a>
         </div>
     </section>
 
-    <!-- Capabilities Section -->
-    <section id="services" class="services animated-section">
+    <!-- Banner Section Removed --><!-- Capabilities Section --><section id="services" class="services animated-section">
         <div class="container">
-            <h2>Capabilities</h2>
+            <h2>Our Capabilities</h2>
             <div class="service-cards">
-                <!-- Service Card 1: Process Data -->
-                <div class="card">
-                    <h3>🔬 Process informatics and optimization</h3>
+                <!-- Service Card 1: Process Data --><div class="card">
+                    <h3>🔬 Process Informatics & Optimization</h3>
                     <p>Implement AI models to analyze continuous and batch process data, identifying critical control parameters to enhance manufacturing yield and efficiency.</p>
                 </div>
                 
-                <!-- Service Card 2: Molecular Data (QSAR) -->
-                <div class="card">
-                    <h3>⚛️ QSAR/QSRR modelling</h3>
+                <!-- Service Card 2: Molecular Data (QSAR) --><div class="card">
+                    <h3>⚛️ QSAR/QSRR Modeling</h3>
                     <p>Develop predictive models for molecular properties (e.g., toxicity, chromatographic retention).</p>
                 </div>
                 
-                <!-- Service Card 3: Data Strategy -->
-                <div class="card">
-                    <h3>📊 Data strategy and architecture</h3>
+                <!-- Service Card 3: Data Strategy --><div class="card">
+                    <h3>📊 Data Strategy & Architecture</h3>
                     <p>Design and deploy scalable data pipelines and visualization tools that integrate chemical datasets, enabling informed decision-making.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Implemented Solutions Section (Updated ID and Class) -->
-    <section id="implemented-solutions" class="implemented-solutions animated-section">
+    <!-- Case Studies Section --><section id="case-studies" class="case-studies animated-section">
         <div class="container">
-            <h2>Implemented Solutions</h2>
-            <!-- UPDATED: Class name for consistency -->
-            <p class="implemented-solutions-intro">My commitment to practical results is demonstrated through successful projects across drug discovery and manufacturing. Explore how I delivered predictive power to clients.</p>
-            <!-- UPDATED: Content to reflect user's work -->
-            <div class="solution-grid">
-                
-                <!-- Solution 1: QSAR models -->
+            <h2>Proven Impact: Case Studies</h2>
+            <p class="case-studies-intro">Our commitment to practical results is demonstrated through successful projects across drug discovery and manufacturing. Explore how we delivered predictive power to our clients.</p>
+            <div class="case-study-grid">
                 <div class="study-placeholder">
-                    <h3 class="text-gradient">Development of QSAR predictive models (AlvaScience)</h3>
-                    <p>Built reproducible cheminformatics pipelines for QSAR modelling, including descriptor calculation, feature selection, and model validation.</p>
+                    <h3 class="text-gradient">HPLC retention time prediction and mechanism elucidation</h3>
+                    <p>Reduced HPLC method development using ML models.</p>
                 </div>
-                
-                <!-- Solution 2: Process Optimization -->
                 <div class="study-placeholder">
-                    <h3 class="text-gradient">API-Driven Manufacturing Process Optimization (Cambrex)</h3>
-                    <p>Applied data science and chemometric analysis to QC and production data to monitor failure rates and identify critical trends.</p>
+                    <h3 class="text-gradient">Manufacturing Process Optimization</h3>
+                    <p>Implemented process to understand and solve issues in production.</p>
                 </div>
-
-                <!-- Solution 3: QSRR for University of Ghent -->
-                <div class="study-placeholder">
-                    <h3 class="text-gradient">Advanced QSRR Modelling for Chromatography (UGent)</h3>
-                    <p>Built ML pipelines for retention time prediction and chromatographic behavior of pollutants using molecular descriptors. Integrated Python-based tools for structure standardization, data wrangling, and structure-property modelling.</p>
-                    <div class="study-links">
-                        <a href="https://link.springer.com/article/10.1186/s13321-024-00873-6" target="_blank">Physicochemical modelling of the retention mechanism of temperature-responsive polymeric columns for HPLC through machine learning algorithms.</a>
-                        <a href="https://www.sciencedirect.com/science/article/abs/pii/S0165993625000755" target="_blank">Prediction of Retention Indices in LC-HRMS for Enhanced Structural Identification of Organic Micropollutants in Water: Selectivity-Based Filtration</a>
-                        <a href="https://pubs.acs.org/doi/abs/10.1021/acs.analchem.4c01784" target="_blank">The role and choice of molecular descriptors for predicting retention times in HPLC: A comprehensive review</a>
-                    </div>
-                </div>
-
             </div>
+            <a href="#contact" class="cta-button contact-cta">Request Portfolio Access</a>
         </div>
     </section>
 
 
-    <!-- About Section -->
-    <section id="about" class="about animated-section">
+    <!-- About Section --><section id="about" class="about animated-section">
         <div class="container">
             <h2>Bringing together science and AI</h2>
-            <!-- Updated the main paragraph to reflect a solo consultancy -->
-            <p>ChemCoreAI is my specialized consulting practice, focused on the practical application of AI in chemistry, pharmaceuticals, and materials science. I combine expertise in cheminformatics and artificial intelligence to build custom, validated models that solve specific chemical challenges and deliver measurable business value.</p>
-            <p class="vision">"My mission is to convert complex chemical data into reliable, actionable intelligence."</p>
-
-            <!-- New Founder Bio Section -->
-            <div class="founder-card">
-                <h3>The Founder</h3>
-                <span class="founder-title">Cheminformatics Consultant and Data Scientist</span>
-                <p>I started ChemCoreAI to bridge the gap between chemical data and computational techniques. My background is rooted in analytical chemistry and during the PhD that unified chemistry with machine learning, I learnt to speak both the language of the lab and the language of the algorithm. I handle every project directly, ensuring clear communication, domain expertise, and a commitment to high-quality, reproducible results from start to finish.</p>
-            </div>
+            <p>ChemCoreAI is a specialized firm focused on the practical application of AI in chemistry, pharmaceuticals, and materials science. Our team combines expertise in chemistry and artificial intelligence to build custom, validated models that solve specific challenges and deliver measurable business value.</p>
+            <p class="vision">"Our mission is to convert complex chemical data into reliable, actionable intelligence."</p>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact animated-section">
+    <!-- Contact Section --><section id="contact" class="contact animated-section">
         <div class="container">
-            <h2>Connect With Me</h2>
+            <h2>Connect With Our Experts</h2>
             <p>Ready to redefine what's possible with your chemical data? Let's discuss how ChemCoreAI can drive your next breakthrough.</p>
             
-            <!-- Contact Form -->
-            <form>
+            <!-- Contact Form --><form>
                 <div>
                     <label for="name">Your Name:</label>
                     <input type="text" id="name" name="name" required placeholder="John Doe">
@@ -622,16 +533,15 @@
                     <input type="text" id="company" name="company" placeholder="Your Company Name">
                 </div>
                 <div>
-                    <label for="message">How can I help?</label>
-                    <textarea id="message" name="message" rows="6" required placeholder="Tell me about your project or inquiry..."></textarea>
+                    <label for="message">How can we help?</label>
+                    <textarea id="message" name="message" rows="6" required placeholder="Tell us about your project or inquiry..."></textarea>
                 </div>
                 <button type="submit" class="cta-button">Send Inquiry</button>
             </form>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
+    <!-- Footer --><footer>
         <div class="container">
             <p>&copy; 2025 ChemCoreAI. All rights reserved.</p>
             <p>
