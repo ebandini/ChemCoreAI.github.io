@@ -4,489 +4,456 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChemCoreAI - Intelligence for Chemical Innovation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- FIX: Added favicon link. Assuming 'favicon.ico' or 'logo.png' is in the root directory. -->
     <link rel="icon" type="image/x-icon" href="logo.png"> 
     
     <style>
-        /* --- General Styling --- */
+        /* --- Modern Design System --- */
         :root {
-            --primary-color: #5a8cff; /* A vibrant, modern blue */
-            --secondary-color: #2ED06E; /* A complementary, energetic green */
-            --dark-bg: #1A1A2E; /* Deep, sophisticated background */
-            --mid-dark-bg: #2C2C40; /* Slightly lighter for cards/sections */
-            --light-text: #E0E0E0; /* Light text for contrast */
-            --lighter-text: #F8F8F8; /* Even lighter for headings */
-            --border-color: rgba(90, 140, 255, 0.3); /* Subtle blue border */
-            --gradient-start: #1A1A2E;
-            --gradient-end: #0F0F1A;
-            --font-family-body: 'Inter', sans-serif;
-            --font-family-heading: 'Montserrat', sans-serif;
+            /* Palette: Deep Space & Neon Accents */
+            --bg-color: #030712; /* Very dark, almost black */
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --card-hover-border: rgba(90, 140, 255, 0.4);
+            
+            --primary-color: #60a5fa; /* Lighter blue for dark mode visibility */
+            --secondary-color: #34d399; /* Mint green */
+            --accent-glow: rgba(96, 165, 250, 0.15);
+            
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+            
+            --font-body: 'Inter', sans-serif;
+            --font-heading: 'Montserrat', sans-serif;
+            
+            --radius-md: 12px;
+            --radius-lg: 24px;
+        }
+
+        /* Smooth scrolling & Box sizing */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        *, *::before, *::after {
+            box-sizing: border-box;
         }
 
         body {
-            font-family: var(--font-family-body);
+            font-family: var(--font-body);
             margin: 0;
             padding: 0;
-            background: linear-gradient(180deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
-            color: var(--light-text);
-            line-height: 1.7;
-            scroll-behavior: smooth;
-            overflow-x: hidden; /* Prevent horizontal scroll from animations */
+            background-color: var(--bg-color);
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px; /* Technical Grid Pattern */
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Typography Override */
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            color: var(--text-main);
+            letter-spacing: -0.02em; /* Tight tracking for modern feel */
+            margin-top: 0;
+        }
+        
+        h1 { 
+            font-size: clamp(3rem, 8vw, 5rem); 
+            line-height: 1.1; 
+            font-weight: 800;
+        }
+        
+        h2 { 
+            font-size: clamp(2rem, 5vw, 3rem); 
+            text-align: center; 
+            margin-bottom: 3rem;
+            font-weight: 700;
+        }
+        
+        h3 { 
+            font-size: 1.5rem; 
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        p {
+            color: var(--text-muted);
+            font-size: 1.125rem;
+            font-weight: 300;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s ease;
         }
 
         .container {
             width: 90%;
-            max-width: 1300px; /* Wider container */
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 20px 0;
-        }
-
-        h1, h2, h3 {
-            font-family: var(--font-family-heading);
-            color: var(--lighter-text);
-            margin-bottom: 20px;
-        }
-        
-        h1 { font-size: clamp(2.8em, 6vw, 4.5em); line-height: 1.1; }
-        h2 { font-size: clamp(2em, 4vw, 3.5em); text-align: center; margin-bottom: 50px;}
-        h3 { font-size: 1.8em; }
-
-        section {
-            padding: 80px 0;
             position: relative;
-            overflow: hidden;
+            z-index: 2;
         }
 
-        /* --- Utility Classes --- */
+        /* --- Components --- */
+        
+        /* Gradient Text */
         .text-gradient {
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        /* --- Header/Navigation --- */
+        /* Buttons */
+        .cta-button {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--text-main);
+            color: var(--bg-color);
+            padding: 1rem 2.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: 1px solid transparent;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+        
+        .cta-button:hover {
+            background: transparent;
+            color: var(--text-main);
+            border-color: var(--text-main);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px -10px rgba(255, 255, 255, 0.2);
+        }
+
+        /* --- Header / Nav --- */
         header {
-            background: rgba(26, 26, 46, 0.8); /* Semi-transparent dark bg */
-            backdrop-filter: blur(10px); /* Frosted glass effect */
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            position: sticky;
-            top: 0;
+            position: fixed;
+            top: 20px;
+            left: 0;
+            right: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(90, 140, 255, 0.1);
+            display: flex;
+            justify-content: center;
+        }
+
+        header .container {
+            /* Floating Glass Pill Navbar */
+            background: rgba(10, 10, 15, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: 9999px;
+            padding: 0.75rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            max-width: 1000px;
+            width: 90%;
         }
 
         .logo-text {
-            font-size: 2em;
+            font-size: 1.25rem;
             font-weight: 700;
-            color: var(--lighter-text);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        .logo-link {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-        }
-        .logo-link:hover .logo-text {
-            color: var(--primary-color);
-        }
-
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
+            letter-spacing: -0.03em;
         }
 
         nav ul {
+            display: flex;
             list-style: none;
             margin: 0;
             padding: 0;
-            display: flex;
-        }
-
-        nav ul li {
-            margin-left: 40px;
+            gap: 2rem;
         }
 
         nav ul li a {
-            text-decoration: none;
-            color: var(--light-text);
+            font-size: 0.95rem;
             font-weight: 500;
-            padding: 8px 0;
-            position: relative;
-            transition: color 0.3s ease;
+            color: var(--text-muted);
         }
 
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background-color: var(--primary-color);
-            transition: width 0.3s ease, left 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-            left: 0;
-        }
         nav ul li a:hover {
-            color: var(--primary-color);
+            color: var(--text-main);
         }
 
         /* --- Hero Section --- */
         .hero {
-            padding: 150px 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            background: url('https://source.unsplash.com/random/1920x1080/?abstract-chemistry-ai') no-repeat center center/cover; /* Dynamic background image */
             position: relative;
-            isolation: isolate; /* To ensure ::before pseudo-element is behind */
+            padding-top: 100px; /* Offset for header */
         }
+        
+        /* Abstract Background Glow */
         .hero::before {
             content: '';
             position: absolute;
-            inset: 0;
-            background: rgba(10, 10, 25, 0.7); /* Dark overlay */
-            backdrop-filter: blur(3px); /* Subtle blur effect */
-            z-index: -1;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(90, 140, 255, 0.15) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
+            filter: blur(60px);
         }
 
         .hero h1 {
-            font-size: clamp(3em, 7vw, 5.5em);
-            margin-bottom: 25px;
-            letter-spacing: -1px;
-            text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            margin-bottom: 1.5rem;
         }
 
         .hero p {
-            font-size: clamp(1.2em, 2.5vw, 1.6em);
-            max-width: 900px;
-            margin: 0 auto 50px;
-            color: var(--light-text);
-            line-height: 1.5;
-            opacity: 0.9;
+            font-size: clamp(1.1rem, 2vw, 1.35rem);
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text-muted);
         }
 
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(45deg, var(--primary-color), #4CAF50); /* Gradient button */
-            color: var(--lighter-text);
-            padding: 16px 40px;
-            text-decoration: none;
-            border-radius: 50px; /* Pill-shaped button */
-            font-size: 1.3em;
-            font-weight: 600;
-            transition: all 0.4s ease;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-            border: none;
+        /* --- Sections General --- */
+        section {
+            padding: 100px 0;
             position: relative;
-            overflow: hidden;
-            z-index: 1;
         }
 
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: all 0.5s ease;
-            z-index: -1;
-        }
-
-        .cta-button:hover::before {
-            left: 100%;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        /* --- Capabilities Section --- */
-        /* Updated CSS Selectors for consistency: .case-studies -> .implemented-solutions */
-        .services h2, .implemented-solutions h2, .about h2, .contact h2 {
-            position: relative;
-            padding-bottom: 15px;
-            margin-bottom: 60px;
-        }
-        .services h2::after, .implemented-solutions h2::after, .about h2::after, .contact h2::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            bottom: 0;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--primary-color);
-            border-radius: 2px;
-        }
-
-        .service-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-top: 50px;
-        }
-
-        .card {
-            background: var(--mid-dark-bg);
-            border-radius: 15px;
-            padding: 40px;
-            text-align: left;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-        .card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at center, rgba(90, 140, 255, 0.08) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            z-index: 0;
-        }
-        .card:hover::before {
-            opacity: 1;
-        }
-
-
-        .card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-            border-color: var(--primary-color);
+        /* Section Separator Line styling using pseudo elements on H2 */
+        section h2::after {
+            display: none; /* Removing the old thick underline */
         }
         
-        .card h3 {
-            font-size: 1.6em;
-            margin-top: 0;
-            margin-bottom: 15px;
-            color: var(--primary-color);
-        }
-        .card p {
-            color: var(--light-text);
+        section h2 {
+            margin-bottom: 60px;
         }
 
-        /* --- Implemented Solutions Section Styles (Updated from Case Studies) --- */
-        .implemented-solutions .implemented-solutions-intro {
-            max-width: 900px;
-            margin: 0 auto 50px;
-            font-size: 1.15em;
-            text-align: center;
-        }
-
-        .solution-grid {
+        /* --- Cards (Bento Grid Style) --- */
+        .grid-container {
             display: grid;
-            /* UPDATED: Use repeat(auto-fit) for flexible 2/3 column layout, matching service cards */
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 30px;
-            max-width: 1300px; /* Use full container width */
-            margin: 0 auto 50px;
+            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
         }
 
-        .study-placeholder {
-            background: var(--mid-dark-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 30px;
-            text-align: left; /* Changed to left align content */
-            transition: background 0.3s, transform 0.4s, box-shadow 0.4s;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-        }
-        .study-placeholder:hover {
-            background: #33334f;
-            transform: translateY(-5px); /* Added hover effect */
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-        .study-placeholder h3 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-        }
-        .study-placeholder p {
-            margin-bottom: 15px;
-            font-size: 1em;
-        }
-        .study-links {
-            margin-top: 20px;
-            font-size: 0.9em;
-            line-height: 1.5;
-        }
-        .study-links a {
-            color: var(--secondary-color);
-            text-decoration: underline;
-            transition: color 0.3s;
-            display: block; /* Make links stackable */
-        }
-        .study-links a:hover {
-            color: var(--primary-color);
-        }
-
-        /* .contact-cta class is now redundant as the button is removed, but keeping the rule just in case it's used elsewhere. */
-        .contact-cta {
-            margin: 0 auto;
-            display: block;
-            width: fit-content;
-        }
-
-
-        /* --- About Section --- */
-        .about .container {
+        .modern-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            justify-content: flex-start;
         }
-        .about p {
-            max-width: 900px;
-            margin: 0 auto;
-            font-size: 1.15em;
-            text-align: center;
-            color: var(--light-text);
+        
+        /* Hover Effect: Glow & Lift */
+        .modern-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--card-hover-border);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
         }
-        .about .vision {
-            margin-top: 40px;
-            font-style: italic;
-            color: rgba(255, 255, 255, 0.7);
+        
+        .modern-card h3 {
+            margin-bottom: 1rem;
+            color: var(--text-main);
         }
-        /* New styles for the Founder Bio */
-        .founder-card {
-            background: var(--mid-dark-bg);
-            border-radius: 15px;
-            padding: 40px;
-            max-width: 650px;
-            margin: 50px auto 0;
-            text-align: center;
-            border: 1px solid var(--secondary-color);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        
+        .modern-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 0;
         }
-        .founder-card h3 {
-            margin-bottom: 5px;
+
+        /* --- Services specific --- */
+        .service-icon {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        /* --- Implemented Solutions Specific --- */
+        .study-links {
+            margin-top: auto; /* Push to bottom */
+            padding-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .study-links a {
+            font-size: 0.9rem;
             color: var(--primary-color);
+            display: inline-block;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
         }
-        .founder-card .founder-title {
+        
+        .study-links a:hover {
+            border-bottom-color: var(--primary-color);
+        }
+
+        .implemented-solutions-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+
+        /* --- About / Founder --- */
+        .about {
+            background: radial-gradient(circle at center, rgba(16, 185, 129, 0.05) 0%, transparent 60%);
+        }
+        
+        .founder-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-top: 4rem;
+        }
+
+        .founder-card {
+            background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            max-width: 800px;
+            text-align: left;
+            position: relative;
+        }
+        
+        .founder-card h3 {
             color: var(--secondary-color);
-            font-size: 1.1em;
-            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+        
+        .founder-title {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
             display: block;
-            font-weight: 500;
-        }
-        .founder-card p {
-            font-size: 1em;
-            text-align: left;
+            margin-bottom: 1.5rem;
         }
 
-
-        /* --- Contact Section --- */
-        #contact form {
-            background: var(--mid-dark-bg);
-            padding: 40px;
-            max-width: 700px;
-            margin: 40px auto;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-            text-align: left;
-            border-radius: 15px;
-            border: 1px solid var(--border-color);
+        .about .vision {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--text-main);
+            text-align: center;
+            margin: 3rem auto;
+            max-width: 800px;
+            line-height: 1.4;
         }
 
-        #contact label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: 500;
-            color: var(--lighter-text);
-            font-size: 1.1em;
+        /* --- Contact --- */
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        #contact input, #contact textarea {
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            background-color: #252538; /* Slightly darker input field */
-            color: var(--lighter-text);
-            border-radius: 8px;
-            box-sizing: border-box;
-            font-size: 1em;
-            transition: border-color 0.3s, box-shadow 0.3s;
+        .contact form {
+            display: grid;
+            gap: 1.5rem;
         }
 
-        #contact input::placeholder, #contact textarea::placeholder {
-            color: rgba(255, 255, 255, 0.4);
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
         }
 
-        #contact input:focus, #contact textarea:focus {
-            border-color: var(--primary-color);
+        label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-left: 4px;
+        }
+
+        input, textarea {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            color: var(--text-main);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        input:focus, textarea:focus {
             outline: none;
-            box-shadow: 0 0 10px rgba(90, 140, 255, 0.5);
-            background-color: #2C2C40; /* Lighter on focus */
-        }
-        #contact .cta-button {
-            width: 100%;
-            border-radius: 8px; /* Slightly less rounded than hero button */
+            border-color: var(--primary-color);
+            background: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.1);
         }
 
         /* --- Footer --- */
         footer {
-            background: var(--gradient-end);
-            color: #888;
-            padding: 40px 0;
+            border-top: 1px solid var(--card-border);
+            padding: 3rem 0;
+            margin-top: 4rem;
             text-align: center;
-            margin-top: 80px;
-            font-size: 0.9em;
-            border-top: 1px solid rgba(90, 140, 255, 0.1);
+            color: var(--text-muted);
+            font-size: 0.875rem;
         }
-
-        footer a {
+        
+        footer .container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .footer-links a:hover {
             color: var(--primary-color);
-            text-decoration: none;
-            margin: 0 15px;
-            transition: color 0.3s;
         }
 
-        footer a:hover {
-            color: var(--secondary-color);
-        }
-
-        /* --- Animations & Special Effects --- */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .animated-section {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeIn 0.8s ease-out forwards;
-            animation-timeline: view();
-            animation-range-start: 20%;
-            animation-range-end: 80%;
-        }
-
-        /* Responsive adjustments */
+        /* Mobile Responsive */
         @media (max-width: 768px) {
-            nav { flex-direction: column; }
-            nav ul { margin-top: 20px; flex-wrap: wrap; justify-content: center;}
-            nav ul li { margin: 0 15px 10px; }
-            .hero { padding: 100px 0; }
-            .hero h1 { font-size: 3em; }
-            .hero p { font-size: 1.1em; }
-            .service-cards { grid-template-columns: 1fr; }
-            .card { padding: 30px; }
-            h2 { font-size: 2em; margin-bottom: 40px; }
-            section { padding: 60px 0; }
-            .solution-grid { grid-template-columns: 1fr; }
+            header .container {
+                padding: 0.75rem 1.5rem;
+                flex-direction: column;
+                gap: 1rem;
+                border-radius: var(--radius-lg);
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .modern-card {
+                padding: 1.5rem;
+            }
+            
+            .founder-card {
+                padding: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -495,17 +462,15 @@
     <!-- Header/Navigation -->
     <header>
         <div class="container">
+            <a href="#home" class="logo-link">
+                <span class="logo-text">ChemCore<span class="text-gradient">AI</span></span>
+            </a>
             <nav>
-                <a href="#home" class="logo-link">
-                    <!-- Text logo only -->
-                    <span class="logo-text">ChemCore<span class="text-gradient">AI</span></span>
-                </a>
                 <ul>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#services">Capabilities</a></li>
-                    <!-- UPDATED: Anchor to #implemented-solutions for consistency -->
-                    <li><a href="#implemented-solutions">Implemented Solutions</a></li>
-                    <li><a href="#about">About Me</a></li>
+                    <li><a href="#implemented-solutions">Solutions</a></li>
+                    <li><a href="#about">About</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -515,9 +480,8 @@
     <!-- Hero Section -->
     <section id="home" class="hero animated-section">
         <div class="container">
-            <h1>Data-Driven <span class="text-gradient">Intelligence</span> for Chemistry</h1>
+            <h1>Data-Driven <span class="text-gradient">Intelligence</span><br>for Chemistry</h1>
             <p>Applying machine learning and cheminformatics to extract predictive insights from chemical, process, and structural data for accelerated discovery and optimization.</p>
-            <a href="#contact" class="cta-button">Schedule a Consultation</a>
         </div>
     </section>
 
@@ -525,57 +489,59 @@
     <section id="services" class="services animated-section">
         <div class="container">
             <h2>Capabilities</h2>
-            <div class="service-cards">
-                <!-- Service Card 1: Process Data -->
-                <div class="card">
-                    <h3>🔬 Process informatics and optimization</h3>
+            <div class="grid-container">
+                <!-- Service Card 1 -->
+                <div class="modern-card">
+                    <span class="service-icon">🔬</span>
+                    <h3>Process informatics and optimization</h3>
                     <p>Implement AI models to analyze continuous and batch process data, identifying critical control parameters to enhance manufacturing yield and efficiency.</p>
                 </div>
                 
-                <!-- Service Card 2: Molecular Data (QSAR) -->
-                <div class="card">
-                    <h3>⚛️ QSAR/QSRR modelling</h3>
+                <!-- Service Card 2 -->
+                <div class="modern-card">
+                    <span class="service-icon">⚛️</span>
+                    <h3>QSAR/QSRR modelling</h3>
                     <p>Develop predictive models for molecular properties (e.g., toxicity, chromatographic retention).</p>
                 </div>
                 
-                <!-- Service Card 3: Data Strategy -->
-                <div class="card">
-                    <h3>📊 Data strategy and architecture</h3>
+                <!-- Service Card 3 -->
+                <div class="modern-card">
+                    <span class="service-icon">📊</span>
+                    <h3>Data strategy and architecture</h3>
                     <p>Design and deploy scalable data pipelines and visualization tools that integrate chemical datasets, enabling informed decision-making.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Implemented Solutions Section (Updated ID and Class) -->
+    <!-- Implemented Solutions Section -->
     <section id="implemented-solutions" class="implemented-solutions animated-section">
         <div class="container">
             <h2>Implemented Solutions</h2>
-            <!-- UPDATED: Class name for consistency -->
             <p class="implemented-solutions-intro">My commitment to practical results is demonstrated through successful projects across drug discovery and manufacturing. Explore how I delivered predictive power to clients.</p>
-            <!-- UPDATED: Content to reflect user's work -->
-            <div class="solution-grid">
+            
+            <div class="grid-container">
                 
-                <!-- Solution 1: QSAR models -->
-                <div class="study-placeholder">
-                    <h3 class="text-gradient">Development of QSAR predictive models (AlvaScience)</h3>
+                <!-- Solution 1 -->
+                <div class="modern-card">
+                    <h3>Development of QSAR predictive models (AlvaScience)</h3>
                     <p>Built reproducible cheminformatics pipelines for QSAR modelling, including descriptor calculation, feature selection, and model validation.</p>
                 </div>
                 
-                <!-- Solution 2: Process Optimization -->
-                <div class="study-placeholder">
-                    <h3 class="text-gradient">API-Driven Manufacturing Process Optimization (Cambrex)</h3>
+                <!-- Solution 2 -->
+                <div class="modern-card">
+                    <h3>API-Driven Manufacturing Process Optimization (Cambrex)</h3>
                     <p>Applied data science and chemometric analysis to QC and production data to monitor failure rates and identify critical trends.</p>
                 </div>
 
-                <!-- Solution 3: QSRR for University of Ghent -->
-                <div class="study-placeholder">
-                    <h3 class="text-gradient">Advanced QSRR Modelling for Chromatography (UGent)</h3>
+                <!-- Solution 3 -->
+                <div class="modern-card">
+                    <h3>Advanced QSRR Modelling for Chromatography (UGent)</h3>
                     <p>Built ML pipelines for retention time prediction and chromatographic behavior of pollutants using molecular descriptors. Integrated Python-based tools for structure standardization, data wrangling, and structure-property modelling.</p>
                     <div class="study-links">
-                        <a href="https://link.springer.com/article/10.1186/s13321-024-00873-6" target="_blank">Physicochemical modelling of the retention mechanism of temperature-responsive polymeric columns for HPLC through machine learning algorithms.</a>
-                        <a href="https://www.sciencedirect.com/science/article/abs/pii/S0165993625000755" target="_blank">Prediction of Retention Indices in LC-HRMS for Enhanced Structural Identification of Organic Micropollutants in Water: Selectivity-Based Filtration</a>
-                        <a href="https://pubs.acs.org/doi/abs/10.1021/acs.analchem.4c01784" target="_blank">The role and choice of molecular descriptors for predicting retention times in HPLC: A comprehensive review</a>
+                        <a href="https://link.springer.com/article/10.1186/s13321-024-00873-6" target="_blank">Physicochemical modelling of the retention mechanism...</a>
+                        <a href="https://www.sciencedirect.com/science/article/abs/pii/S0165993625000755" target="_blank">Prediction of Retention Indices in LC-HRMS...</a>
+                        <a href="https://pubs.acs.org/doi/abs/10.1021/acs.analchem.4c01784" target="_blank">The role and choice of molecular descriptors...</a>
                     </div>
                 </div>
 
@@ -583,47 +549,46 @@
         </div>
     </section>
 
-
     <!-- About Section -->
     <section id="about" class="about animated-section">
         <div class="container">
             <h2>Bringing together science and AI</h2>
-            <!-- Updated the main paragraph to reflect a solo consultancy -->
             <p>ChemCoreAI is my specialized consulting practice, focused on the practical application of AI in chemistry, pharmaceuticals, and materials science. I combine expertise in cheminformatics and artificial intelligence to build custom, validated models that solve specific chemical challenges and deliver measurable business value.</p>
-            <p class="vision">"My mission is to convert complex chemical data into reliable, actionable intelligence."</p>
+            
+            <div class="vision">"My mission is to convert complex chemical data into reliable, actionable intelligence."</div>
 
-            <!-- New Founder Bio Section -->
-            <div class="founder-card">
-                <h3>The Founder</h3>
-                <span class="founder-title">Cheminformatics Consultant and Data Scientist</span>
-                <p>I started ChemCoreAI to bridge the gap between chemical data and computational techniques. My background is rooted in analytical chemistry and during the PhD that unified chemistry with machine learning, I learnt to speak both the language of the lab and the language of the algorithm. I handle every project directly, ensuring clear communication, domain expertise, and a commitment to high-quality, reproducible results from start to finish.</p>
+            <div class="founder-wrapper">
+                <div class="founder-card">
+                    <h3>The Founder</h3>
+                    <span class="founder-title">Cheminformatics Consultant and Data Scientist</span>
+                    <p>I started ChemCoreAI to bridge the gap between chemical data and computational techniques. My background is rooted in analytical chemistry and during the PhD that unified chemistry with machine learning, I learnt to speak both the language of the lab and the language of the algorithm. I handle every project directly, ensuring clear communication, domain expertise, and a commitment to high-quality, reproducible results from start to finish.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
     <section id="contact" class="contact animated-section">
-        <div class="container">
+        <div class="container contact-container">
             <h2>Connect With Me</h2>
-            <p>Ready to redefine what's possible with your chemical data? Let's discuss how ChemCoreAI can drive your next breakthrough.</p>
+            <p style="text-align: center; margin-bottom: 3rem;">Ready to redefine what's possible with your chemical data? Let's discuss how ChemCoreAI can drive your next breakthrough.</p>
             
-            <!-- Contact Form -->
             <form>
-                <div>
-                    <label for="name">Your Name:</label>
+                <div class="form-group">
+                    <label for="name">Your Name</label>
                     <input type="text" id="name" name="name" required placeholder="John Doe">
                 </div>
-                <div>
-                    <label for="email">Your Work Email:</label>
+                <div class="form-group">
+                    <label for="email">Work Email</label>
                     <input type="email" id="email" name="email" required placeholder="name@company.com">
                 </div>
-                <div>
-                    <label for="company">Company (Optional):</label>
+                <div class="form-group">
+                    <label for="company">Company (Optional)</label>
                     <input type="text" id="company" name="company" placeholder="Your Company Name">
                 </div>
-                <div>
+                <div class="form-group">
                     <label for="message">How can I help?</label>
-                    <textarea id="message" name="message" rows="6" required placeholder="Tell me about your project or inquiry..."></textarea>
+                    <textarea id="message" name="message" rows="5" required placeholder="Tell me about your project..."></textarea>
                 </div>
                 <button type="submit" class="cta-button">Send Inquiry</button>
             </form>
@@ -634,11 +599,11 @@
     <footer>
         <div class="container">
             <p>&copy; 2025 ChemCoreAI. All rights reserved.</p>
-            <p>
+            <div class="footer-links">
                 <a href="#">Privacy Policy</a>
                 <a href="#">Terms of Service</a>
                 <a href="mailto:contact@chemcoreai.com">contact@chemcoreai.com</a>
-            </p>
+            </div>
         </div>
     </footer>
 
