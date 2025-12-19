@@ -9,6 +9,7 @@
     <style>
         /* --- Modern Design System --- */
         :root {
+            /* Default Dark Theme Variables */
             --bg-color: #030712;
             --card-bg: rgba(255, 255, 255, 0.03);
             --card-border: rgba(255, 255, 255, 0.08);
@@ -21,11 +22,41 @@
             --text-main: #f9fafb;
             --text-muted: #9ca3af;
             
+            /* Specific Element Colors extracted to variables for theming */
+            --nav-bg: rgba(10, 10, 15, 0.7);
+            --grid-line: rgba(255, 255, 255, 0.02);
+            --input-bg: rgba(255, 255, 255, 0.03);
+            --founder-bg: rgba(255, 255, 255, 0.02);
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --hero-glow-bg: rgba(96, 165, 250, 0.1);
+            
             --font-body: 'Inter', sans-serif;
             --font-heading: 'Montserrat', sans-serif;
             
             --radius-md: 12px;
             --radius-lg: 24px;
+        }
+
+        /* Light Theme Overrides */
+        body.light-mode {
+            --bg-color: #f8fafc;
+            --card-bg: rgba(255, 255, 255, 0.7);
+            --card-border: rgba(0, 0, 0, 0.08);
+            --card-hover-border: rgba(37, 99, 235, 0.5);
+            
+            --primary-color: #2563eb; /* Darker blue for better contrast on white */
+            --secondary-color: #059669; /* Darker green */
+            --accent-glow: rgba(37, 99, 235, 0.1);
+            
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            
+            --nav-bg: rgba(255, 255, 255, 0.85);
+            --grid-line: rgba(0, 0, 0, 0.04);
+            --input-bg: rgba(255, 255, 255, 0.8);
+            --founder-bg: rgba(255, 255, 255, 0.6);
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --hero-glow-bg: rgba(37, 99, 235, 0.08);
         }
 
         html {
@@ -41,13 +72,15 @@
             margin: 0;
             padding: 0;
             background-color: var(--bg-color);
+            /* Updated to use variable for grid lines */
             background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
             background-size: 50px 50px;
             color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         h1, h2, h3 {
@@ -118,7 +151,7 @@
             color: var(--text-main);
             border-color: var(--text-main);
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px -10px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px -10px var(--shadow-color);
         }
 
         /* --- Header / Nav --- */
@@ -133,7 +166,7 @@
         }
 
         header .container {
-            background: rgba(10, 10, 15, 0.7);
+            background: var(--nav-bg);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--card-border);
@@ -142,9 +175,10 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 30px var(--shadow-color);
             max-width: 1000px;
             width: 90%;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         .logo-text {
@@ -152,7 +186,13 @@
             font-weight: 700;
             letter-spacing: -0.03em;
             text-decoration: none;
-            color: white;
+            color: var(--text-main); /* Updated from white to variable */
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
         }
 
         nav ul {
@@ -175,6 +215,36 @@
             color: var(--text-main);
         }
 
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s ease, transform 0.3s ease;
+            border-radius: 50%;
+        }
+
+        .theme-toggle:hover {
+            color: var(--primary-color);
+            transform: rotate(15deg);
+            background: rgba(125, 125, 125, 0.1);
+        }
+
+        .theme-toggle svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
         /* --- Hero Section --- */
         .hero {
             min-height: 100vh;
@@ -191,13 +261,14 @@
             position: absolute;
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(96, 165, 250, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, var(--hero-glow-bg) 0%, transparent 70%);
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 0;
             pointer-events: none;
             filter: blur(60px);
+            transition: background 0.5s ease;
         }
 
         .hero h1 { margin-bottom: 1.5rem; }
@@ -226,13 +297,20 @@
             display: flex;
             flex-direction: column;
             position: relative;
+            /* Added for light mode glassmorphism */
+            backdrop-filter: blur(10px); 
+            -webkit-backdrop-filter: blur(10px);
         }
         
         .modern-card:hover {
             transform: translateY(-8px);
             border-color: var(--card-hover-border);
-            background: rgba(255, 255, 255, 0.05);
-            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.7);
+            /* Slightly different hover BG based on theme */
+            box-shadow: 0 30px 60px -15px var(--shadow-color);
+        }
+        
+        body.light-mode .modern-card:hover {
+             background: rgba(255, 255, 255, 0.9);
         }
 
         /* Icons Update */
@@ -276,7 +354,7 @@
             font-weight: 400;
             transition: all 0.3s ease;
             padding: 8px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(150, 150, 150, 0.1);
             gap: 15px;
         }
 
@@ -317,7 +395,7 @@
         }
 
         .founder-strip {
-            background: rgba(255, 255, 255, 0.02);
+            background: var(--founder-bg);
             border: 1px solid var(--card-border);
             border-radius: var(--radius-md);
             padding: 1.25rem 2rem;
@@ -325,11 +403,14 @@
             margin: 0 auto;
             display: flex;
             align-items: center;
+            justify-content: center; /* Center the content */
             gap: 1.5rem;
+            transition: background 0.3s, border-color 0.3s;
         }
 
         .founder-info {
             flex: 1;
+            text-align: center; /* Center the text inside the block */
         }
 
         .founder-title {
@@ -346,24 +427,33 @@
             font-size: 0.9rem;
             margin: 0;
             line-height: 1.5;
+            color: var(--text-main);
+            font-style: italic; /* Added italic style */
         }
 
         /* --- Contact --- */
         .contact-container { max-width: 600px; margin: 0 auto; }
         .form-group { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.5rem; }
         input, textarea {
-            background: rgba(255, 255, 255, 0.03);
+            background: var(--input-bg);
             border: 1px solid var(--card-border);
             border-radius: var(--radius-md);
             padding: 1.1rem;
             color: var(--text-main);
             font-size: 1rem;
             transition: 0.2s;
+            font-family: var(--font-body);
         }
         input:focus, textarea:focus {
             outline: none;
             border-color: var(--primary-color);
-            background: rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.1); /* Slightly more visible on focus */
+        }
+        
+        /* Fix focus bg for light mode */
+        body.light-mode input:focus, 
+        body.light-mode textarea:focus {
+             background: #ffffff;
         }
 
         /* --- Footer --- */
@@ -385,11 +475,15 @@
         .footer-links a:hover { color: var(--primary-color); }
 
         @media (max-width: 768px) {
-            header .container { flex-direction: column; padding: 1rem; border-radius: var(--radius-lg); }
-            nav ul { gap: 1rem; margin-top: 10px; }
+            header .container { flex-direction: column; padding: 1rem; border-radius: var(--radius-lg); gap: 1rem; }
+            nav { flex-direction: column; gap: 1rem; }
+            nav ul { gap: 1rem; flex-wrap: wrap; justify-content: center;}
             .hero h1 { font-size: 2.8rem; }
             section { padding: 80px 0; }
             .founder-strip { flex-direction: column; text-align: center; }
+            
+            /* Adjust toggle position on mobile */
+            .theme-toggle { position: absolute; right: 20px; top: 20px; }
         }
     </style>
 </head>
@@ -409,6 +503,26 @@
                     <li><a href="#about">About</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
+                
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" class="theme-toggle" aria-label="Switch Theme">
+                    <!-- Default to Sun Icon (since we start in dark mode) -->
+                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <!-- Moon Icon (Hidden initially) -->
+                    <svg class="moon-icon" style="display: none;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
             </nav>
         </div>
     </header>
@@ -426,18 +540,7 @@
         <div class="container">
             <h2>Capabilities</h2>
             <div class="grid-container">
-                <!-- Process Optimization Card -->
-                <div class="modern-card">
-                    <span class="service-icon">
-                        <!-- Wrench Tool Icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
-                        </svg>
-                    </span>
-                    <h3>Process Optimization</h3>
-                    <p>Leveraging data science and machine learning to analyze batch and continuous process data for yield optimization and failure reduction.</p>
-                </div>
-
+                
                 <!-- QSAR/QSRR Card -->
                 <div class="modern-card">
                     <span class="service-icon">
@@ -451,23 +554,17 @@
                     <p>Delivering predictive models for biological activity, toxicity, chromatographic behavior, and other molecular properties.</p>
                 </div>
 
-                <!-- Workflows Design Card -->
+                <!-- Process Optimization Card -->
                 <div class="modern-card">
                     <span class="service-icon">
-                        <!-- Workflow/Flowchart Icon -->
+                        <!-- Wrench Tool Icon -->
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="2" y="2" width="8" height="8" rx="2" ry="2"></rect>
-                            <rect x="14" y="2" width="8" height="8" rx="2" ry="2"></rect>
-                            <rect x="8" y="14" width="8" height="8" rx="2" ry="2"></rect>
-                            <path d="M6 10v4"></path>
-                            <path d="M18 10v2a2 2 0 0 1-2 2h-4"></path>
+                            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
                         </svg>
                     </span>
-                    <h3>Workflows Design</h3>
-                    <p>Engineering automated data pipelines and visualization dashboards.</p>
+                    <h3>Process Optimization</h3>
+                    <p>Leveraging data science and machine learning to analyze batch and continuous process data for yield optimization and failure reduction.</p>
                 </div>
-            </div>
-        </div>
     </section>
 
     <!-- Implemented Solutions Section -->
@@ -521,7 +618,7 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" style="background: rgba(255,255,255,0.01)">
+    <section id="about">
         <div class="container">
             <h2>Vision</h2>
             <div class="vision">ChemCoreAI translates chemical data into reliable, actionable intelligence for innovation.</div>
@@ -560,14 +657,49 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2025 ChemCoreAI. Engineering the future of chemical data science.</p>
+            <p>&copy; 2025 ChemCoreAI. Based in Milan, Italy.</p>
             <div class="footer-links">
-                <a href="#">Privacy</a>
-                <a href="#">Terms</a>
                 <a href="mailto:contact@chemcoreai.com">contact@chemcoreai.com</a>
             </div>
         </div>
     </footer>
 
+    <!-- Theme Switcher Script -->
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const sunIcon = document.querySelector('.sun-icon');
+        const moonIcon = document.querySelector('.moon-icon');
+        const body = document.body;
+
+        // Check for saved preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            enableLightMode();
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (body.classList.contains('light-mode')) {
+                disableLightMode();
+            } else {
+                enableLightMode();
+            }
+        });
+
+        function enableLightMode() {
+            body.classList.add('light-mode');
+            localStorage.setItem('theme', 'light');
+            // Show Moon (to switch back to dark), Hide Sun
+            sunIcon.style.display = 'none';
+            moonIcon.style.display = 'block';
+        }
+
+        function disableLightMode() {
+            body.classList.remove('light-mode');
+            localStorage.setItem('theme', 'dark');
+            // Show Sun (to switch to light), Hide Moon
+            sunIcon.style.display = 'block';
+            moonIcon.style.display = 'none';
+        }
+    </script>
 </body>
 </html>
