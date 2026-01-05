@@ -8,7 +8,7 @@
     <!-- Stylistic Favicon (Atomic 'C' Logo) -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' stroke='%232dd4bf' stroke-width='8' fill='none' stroke-dasharray='180 60'/><circle cx='50' cy='50' r='12' fill='%232dd4bf'/><circle cx='75' cy='25' r='6' fill='%232dd4bf'/></svg>">
 
-    <!-- Importing Newsreader (Serif) and Inter (Sans) -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
@@ -16,42 +16,31 @@
     <style>
         /* --- Hybrid Design System --- */
         :root {
-            /* Palette: Soft Slate & Cyan-Teal (AI/Tech Style) */
-            --bg-color: #1a1c1e; /* Lighter Slate (Not Black) */
+            --bg-color: #1a1c1e;
             --text-main: #f0f0f0;
             --text-muted: #94a3b8;
-            
-            /* Card Variables (Glassmorphism + Borders) */
             --card-bg: rgba(255, 255, 255, 0.03);
             --card-border: rgba(255, 255, 255, 0.08);
-            --card-hover-border: rgba(45, 212, 191, 0.4); /* Cyan/Teal accent */
-            
-            /* UI Elements */
+            --card-hover-border: rgba(45, 212, 191, 0.4);
             --nav-bg: rgba(30, 32, 35, 0.8);
-            --accent-color: #2dd4bf; /* Teal/Cyan AI color */
+            --accent-color: #2dd4bf;
             --shadow-color: rgba(0, 0, 0, 0.4);
-            
-            /* Typography */
             --font-display: 'Newsreader', serif;
             --font-body: 'Inter', sans-serif;
-            
             --radius-pill: 9999px;
             --radius-card: 16px;
         }
 
-        /* Light Theme (Warm Paper) */
         body.light-mode {
-            --bg-color: #f2f1ee; /* Warm Paper */
+            --bg-color: #f2f1ee;
             --text-main: #1a1a1a;
             --text-muted: #555;
-            
             --card-bg: rgba(255, 255, 255, 0.6);
             --card-border: rgba(0, 0, 0, 0.06);
             --card-hover-border: rgba(20, 184, 166, 0.6);
-            
             --nav-bg: rgba(255, 255, 255, 0.85);
             --shadow-color: rgba(0, 0, 0, 0.08);
-            --accent-color: #0d9488; /* Darker teal for legibility on light */
+            --accent-color: #0d9488;
         }
 
         html { scroll-behavior: smooth; }
@@ -69,300 +58,52 @@
             background-size: 40px 40px;
         }
 
-        /* Typography */
-        h1, h2, h3 {
-            font-family: var(--font-display);
-            color: var(--text-main);
-            margin-top: 0;
-            font-weight: 500;
-        }
+        h1, h2, h3 { font-family: var(--font-display); color: var(--text-main); margin-top: 0; font-weight: 500; }
+        h1 { font-size: clamp(3.5rem, 8vw, 5.5rem); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+        h2 { font-size: clamp(2rem, 5vw, 3rem); text-align: center; margin-bottom: 3.5rem; }
+        h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+        p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.7; }
 
-        h1 {
-            font-size: clamp(3.5rem, 8vw, 5.5rem);
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-            margin-bottom: 1.5rem;
-        }
+        .serif-italic { font-family: var(--font-display); font-style: italic; color: var(--accent-color); }
+        .container { width: 90%; max-width: 1100px; margin: 0 auto; position: relative; }
 
-        h2 {
-            font-size: clamp(2rem, 5vw, 3rem);
-            text-align: center;
-            margin-bottom: 3.5rem;
-        }
-
-        h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            font-weight: 500;
-        }
-
-        p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            line-height: 1.7;
-        }
-
-        .serif-italic {
-            font-family: var(--font-display);
-            font-style: italic;
-            color: var(--accent-color);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1100px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        /* --- Floating Navigation --- */
-        header {
-            position: fixed;
-            top: 24px;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            display: flex;
-            justify-content: center;
-            pointer-events: none;
-        }
-
-        .nav-pill {
-            pointer-events: auto;
-            background: var(--nav-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--card-border);
-            border-radius: var(--radius-pill);
-            padding: 0.75rem 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 4px 20px var(--shadow-color);
-            width: 90%;
-            max-width: 900px;
-            transition: all 0.3s ease;
-        }
-
-        .logo {
-            font-family: var(--font-display);
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--text-main);
-            text-decoration: none;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            gap: 2rem;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
+        header { position: fixed; top: 24px; left: 0; right: 0; z-index: 1000; display: flex; justify-content: center; pointer-events: none; }
+        .nav-pill { pointer-events: auto; background: var(--nav-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--card-border); border-radius: var(--radius-pill); padding: 0.75rem 2rem; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 20px var(--shadow-color); width: 90%; max-width: 900px; transition: all 0.3s ease; }
+        .logo { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; color: var(--text-main); text-decoration: none; }
+        nav ul { display: flex; list-style: none; margin: 0; padding: 0; gap: 2rem; }
+        nav a { text-decoration: none; color: var(--text-muted); font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
         nav a:hover { color: var(--accent-color); }
 
-        /* Theme Toggle */
-        .theme-toggle {
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            color: var(--text-muted);
-            padding: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
+        .theme-toggle { background: transparent; border: none; cursor: pointer; color: var(--text-muted); padding: 5px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
+        .theme-toggle:hover { color: var(--accent-color); transform: rotate(15deg); }
+        .theme-toggle svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-        .theme-toggle:hover {
-            color: var(--accent-color);
-            transform: rotate(15deg);
-        }
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding-top: 80px; }
+        .hero-text-container { max-width: 800px; margin: 0 auto; }
 
-        .theme-toggle svg {
-            width: 20px;
-            height: 20px;
-            fill: none;
-            stroke: currentColor;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
-        /* --- Hero Section --- */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding-top: 80px;
-        }
-
-        .hero-text-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* --- Grids & Boxes --- */
         section { padding: 100px 0; }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 24px;
-        }
-
-        .hybrid-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: var(--radius-card);
-            padding: 2.5rem;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            display: flex;
-            flex-direction: column;
-            backdrop-filter: blur(5px);
-        }
-
-        .hybrid-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--card-hover-border);
-            box-shadow: 0 20px 40px -10px var(--shadow-color);
-        }
-
-        /* Icons */
-        .service-icon {
-            color: var(--accent-color);
-            margin-bottom: 1.5rem;
-            display: inline-block;
-        }
-        
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 24px; }
+        .hybrid-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-card); padding: 2.5rem; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; backdrop-filter: blur(5px); }
+        .hybrid-card:hover { transform: translateY(-5px); border-color: var(--card-hover-border); box-shadow: 0 20px 40px -10px var(--shadow-color); }
+        .service-icon { color: var(--accent-color); margin-bottom: 1.5rem; display: inline-block; }
         .service-icon svg { width: 40px; height: 40px; stroke-width: 1.5; }
 
-        /* --- Publication Links --- */
-        .arrow-link {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            text-decoration: none;
-            color: var(--text-muted);
-            padding: 12px 0;
-            border-bottom: 1px solid var(--card-border);
-            transition: 0.3s ease;
-            margin-top: 0.5rem;
-        }
+        .arrow-link { display: flex; justify-content: space-between; align-items: flex-start; text-decoration: none; color: var(--text-muted); padding: 12px 0; border-bottom: 1px solid var(--card-border); transition: 0.3s ease; margin-top: 0.5rem; }
+        .arrow-link:hover { color: var(--text-main); border-bottom-color: var(--accent-color); }
+        .arrow-link:hover svg { transform: translate(3px, -3px); stroke: var(--accent-color); }
 
-        .arrow-link span { font-size: 0.95rem; }
+        .vision-text { font-family: var(--font-display); font-size: 2rem; text-align: center; max-width: 800px; margin: 0 auto 3rem; line-height: 1.4; }
+        .founder-strip { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; max-width: 600px; margin: 0 auto; text-align: center; }
 
-        .arrow-link:hover {
-            color: var(--text-main);
-            border-bottom-color: var(--accent-color);
-        }
-
-        .arrow-link:hover svg {
-            transform: translate(3px, -3px);
-            stroke: var(--accent-color);
-        }
-
-        /* --- About Section --- */
-        .vision-text {
-            font-family: var(--font-display);
-            font-size: 2rem;
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 3rem;
-            line-height: 1.4;
-        }
-
-        .founder-strip {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        /* --- Contact Section --- */
-        .contact-wrapper {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        form {
-            margin-top: 2rem;
-        }
-
-        .form-row { margin-bottom: 1.5rem; }
-
-        input, textarea {
-            width: 100%;
-            padding: 1rem 0;
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid var(--card-border);
-            font-family: var(--font-body);
-            font-size: 1rem;
-            color: var(--text-main);
-            border-radius: 0;
-            transition: border-color 0.3s;
-        }
-
-        input:focus, textarea:focus {
-            outline: none;
-            border-bottom-color: var(--accent-color);
-        }
+        .contact-wrapper { max-width: 600px; margin: 0 auto; text-align: center; }
         
-        input::placeholder, textarea::placeholder { color: var(--text-muted); opacity: 0.7; }
+        input, textarea { width: 100%; padding: 1rem 0; background: transparent; border: none; border-bottom: 1px solid var(--card-border); font-family: var(--font-body); font-size: 1rem; color: var(--text-main); border-radius: 0; transition: border-color 0.3s; margin-bottom: 1.5rem; }
+        input:focus, textarea:focus { outline: none; border-bottom-color: var(--accent-color); }
+        .btn-minimal { background: var(--accent-color); color: #1a1c1e; padding: 1rem 2.5rem; border-radius: var(--radius-pill); text-decoration: none; font-weight: 600; border: 1px solid var(--accent-color); cursor: pointer; transition: all 0.3s ease; font-family: var(--font-body); width: 100%; }
+        .btn-minimal:hover { background: transparent; color: var(--text-main); }
 
-        .btn-minimal {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            background: var(--accent-color);
-            color: #1a1c1e;
-            padding: 1rem 2.5rem;
-            border-radius: var(--radius-pill);
-            text-decoration: none;
-            font-weight: 600;
-            border: 1px solid var(--accent-color);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: var(--font-body);
-            margin-top: 1rem;
-            width: 100%;
-        }
-
-        .btn-minimal:hover {
-            background: transparent;
-            color: var(--text-main);
-        }
-
-        /* --- Footer --- */
-        footer {
-            border-top: 1px solid var(--card-border);
-            padding: 4rem 0;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        .footer-link {
-            color: var(--text-main);
-            text-decoration: none;
-            margin-top: 1rem;
-            display: inline-block;
-        }
+        footer { border-top: 1px solid var(--card-border); padding: 4rem 0; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
+        .footer-link { color: var(--text-main); text-decoration: none; margin-top: 1rem; display: inline-block; font-weight: 500; }
 
         @media (max-width: 768px) {
             .nav-pill { flex-direction: column; gap: 1rem; border-radius: 24px; padding: 1.5rem; }
@@ -374,7 +115,6 @@
 </head>
 <body>
 
-    <!-- Header -->
     <header>
         <div class="nav-pill">
             <a href="#home" class="logo">ChemCoreAI</a>
@@ -387,27 +127,13 @@
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
-            
             <button id="theme-toggle" class="theme-toggle" aria-label="Switch Theme">
-                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="5"></circle>
-                    <line x1="12" y1="1" x2="12" y2="3"></line>
-                    <line x1="12" y1="21" x2="12" y2="23"></line>
-                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                    <line x1="1" y1="12" x2="3" y2="12"></line>
-                    <line x1="21" y1="12" x2="23" y2="12"></line>
-                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                </svg>
-                <svg class="moon-icon" style="display: none;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                </svg>
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg class="moon-icon" style="display: none;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
             </button>
         </div>
     </header>
 
-    <!-- Hero -->
     <section id="home" class="hero">
         <div class="container hero-text-container">
             <h1>Chemistry meets <br><span class="serif-italic">Artificial Intelligence</span></h1>
@@ -427,9 +153,8 @@
                         </svg>
                     </span>
                     <h3>QSAR/QSRR Modelling</h3>
-                    <p>Delivering predictive models for biological activity, toxicity, molecular properties and chromatographic behavior. Mapping molecular structure to property via mathematical descriptors.</p>
+                    <p>Delivering predictive models for biological activity, toxicity, and molecular properties. Mapping molecular structure to property via mathematical descriptors.</p>
                 </div>
-
                 <div class="hybrid-card">
                     <span class="service-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -438,31 +163,27 @@
                         </svg>
                     </span>
                     <h3>Process Optimization</h3>
-                    <p>Leveraging data science and machine learning to analyze batch and continuous process data for yield optimization and failure reduction.</p>
+                    <p>Analyzing production data for yield optimization and failure reduction using advanced machine learning models.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Solutions -->
     <section id="solutions">
         <div class="container">
             <h2>Implemented Solutions</h2>
             <div class="grid-container">
                 <div class="hybrid-card">
                     <h3>QSAR Model Development (AlvaScience)</h3>
-                    <p>Building reproducible cheminformatics pipelines for QSAR modelling, including descriptor calculation, feature selection, and model validation.</p>
+                    <p>Building reproducible cheminformatics pipelines for QSAR modelling and model validation.</p>
                 </div>
-                
                 <div class="hybrid-card">
                     <h3>Manufacturing Optimization (Cambrex)</h3>
-                    <p>Applying data science and chemometric analysis to QC and production data to monitor failure rates and identify critical trends.</p>
+                    <p>Monitoring failure rates and identifying critical trends in production data via chemometric analysis.</p>
                 </div>
-
                 <div class="hybrid-card">
                     <h3>QSRR for Chromatography (UGent)</h3>
-                    <p>Built ML pipelines for retention time prediction. Integrated tools for structure standardization and data wrangling.</p>
-                    
+                    <p>Built ML pipelines for retention time prediction using standardized chemical structures.</p>
                     <div style="margin-top: 1.5rem;">
                         <a href="https://link.springer.com/article/10.1186/s13321-024-00873-6" target="_blank" class="arrow-link">
                             <span>QSRR for novel HPLC columns</span>
@@ -472,48 +193,42 @@
                             <span>Retention time prediction in HPLC</span>
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
                         </a>
-                        <a href="#" target="_blank" class="arrow-link">
-                            <span>Review on molecular descriptors</span>
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
     <section id="vision">
         <div class="container">
             <h2>Vision</h2>
             <div class="vision-text">ChemCoreAI translates chemical data into reliable, actionable intelligence for innovation.</div>
-
             <div class="founder-strip">
-                <p style="margin: 0; font-style: italic; color: var(--text-main);">Every engagement is directed by a specialist in analytical chemistry and data science, bridging the gap between laboratory and computational.</p>
+                <p style="margin: 0; font-style: italic; color: var(--text-main);">Bridging the gap between laboratory results and computational intelligence.</p>
             </div>
         </div>
     </section>
 
-    <!-- Contact -->
+    <!-- Contact Section -->
     <section id="contact">
         <div class="container contact-wrapper">
             <h2>Get in touch</h2>
-            <form id="contact-form">
-                <div class="form-row">
-                    <input type="text" placeholder="Full Name" required>
-                </div>
-                <div class="form-row">
-                    <input type="email" placeholder="name@company.com" required>
-                </div>
-                <div class="form-row">
-                    <textarea rows="4" placeholder="How can ChemCoreAI support your project?" required></textarea>
-                </div>
+            <form id="contact-form" action="https://formsubmit.co/contact@chemcoreai.com" method="POST">
+                <!-- Data fields -->
+                <input type="text" name="name" placeholder="Full Name" required>
+                <input type="email" name="email" placeholder="name@company.com" required>
+                <textarea name="message" rows="4" placeholder="How can ChemCoreAI support your project?" required></textarea>
+                
+                <!-- Optimization fields -->
+                <input type="text" name="_honey" style="display:none">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_subject" value="New Inquiry from ChemCoreAI Website">
+                
                 <button type="submit" class="btn-minimal">Send Inquiry</button>
             </form>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <p>&copy; 2025 ChemCoreAI. Based in Milan, Italy.</p>
@@ -521,24 +236,16 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script>
         const themeToggleBtn = document.getElementById('theme-toggle');
         const sunIcon = document.querySelector('.sun-icon');
         const moonIcon = document.querySelector('.moon-icon');
         const body = document.body;
 
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'light') {
-            enableLightMode();
-        }
+        if (localStorage.getItem('theme') === 'light') enableLightMode();
 
         themeToggleBtn.addEventListener('click', () => {
-            if (body.classList.contains('light-mode')) {
-                disableLightMode();
-            } else {
-                enableLightMode();
-            }
+            body.classList.contains('light-mode') ? disableLightMode() : enableLightMode();
         });
 
         function enableLightMode() {
@@ -554,23 +261,6 @@
             sunIcon.style.display = 'block';
             moonIcon.style.display = 'none';
         }
-
-        // Form handling stub
-        document.getElementById('contact-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            // In a real app, this would send data to a backend.
-            const btn = e.target.querySelector('button');
-            const originalText = btn.innerText;
-            btn.innerText = "Message Received";
-            btn.style.opacity = "0.7";
-            btn.disabled = true;
-            setTimeout(() => {
-                btn.innerText = originalText;
-                btn.style.opacity = "1";
-                btn.disabled = false;
-                e.target.reset();
-            }, 3000);
-        });
     </script>
 </body>
 </html>
