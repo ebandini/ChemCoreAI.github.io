@@ -4,195 +4,152 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChemCoreAI - Intelligence for Chemical Innovation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Stylistic Favicon (Atomic 'C' Logo) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' stroke='%232dd4bf' stroke-width='8' fill='none' stroke-dasharray='180 60'/><circle cx='50' cy='50' r='12' fill='%232dd4bf'/><circle cx='75' cy='25' r='6' fill='%232dd4bf'/></svg>">
+
+    <!-- Importing Newsreader (Serif) and Inter (Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
     
     <style>
-        /* --- Modern Design System --- */
+        /* --- Hybrid Design System --- */
         :root {
-            /* Default Dark Theme Variables */
-            --bg-color: #030712;
+            /* Palette: Soft Slate & Cyan-Teal (AI/Tech Style) */
+            --bg-color: #1a1c1e; /* Lighter Slate (Not Black) */
+            --text-main: #f0f0f0;
+            --text-muted: #94a3b8;
+            
+            /* Card Variables (Glassmorphism + Borders) */
             --card-bg: rgba(255, 255, 255, 0.03);
             --card-border: rgba(255, 255, 255, 0.08);
-            --card-hover-border: rgba(96, 165, 250, 0.4);
+            --card-hover-border: rgba(45, 212, 191, 0.4); /* Cyan/Teal accent */
             
-            --primary-color: #60a5fa;
-            --secondary-color: #34d399;
-            --accent-glow: rgba(96, 165, 250, 0.15);
+            /* UI Elements */
+            --nav-bg: rgba(30, 32, 35, 0.8);
+            --accent-color: #2dd4bf; /* Teal/Cyan AI color */
+            --shadow-color: rgba(0, 0, 0, 0.4);
             
-            --text-main: #f9fafb;
-            --text-muted: #9ca3af;
-            
-            /* Specific Element Colors extracted to variables for theming */
-            --nav-bg: rgba(10, 10, 15, 0.7);
-            --grid-line: rgba(255, 255, 255, 0.02);
-            --input-bg: rgba(255, 255, 255, 0.03);
-            --founder-bg: rgba(255, 255, 255, 0.02);
-            --shadow-color: rgba(0, 0, 0, 0.5);
-            --hero-glow-bg: rgba(96, 165, 250, 0.1);
-            
+            /* Typography */
+            --font-display: 'Newsreader', serif;
             --font-body: 'Inter', sans-serif;
-            --font-heading: 'Montserrat', sans-serif;
             
-            --radius-md: 12px;
-            --radius-lg: 24px;
+            --radius-pill: 9999px;
+            --radius-card: 16px;
         }
 
-        /* Light Theme Overrides */
+        /* Light Theme (Warm Paper) */
         body.light-mode {
-            --bg-color: #f8fafc;
-            --card-bg: rgba(255, 255, 255, 0.7);
-            --card-border: rgba(0, 0, 0, 0.08);
-            --card-hover-border: rgba(37, 99, 235, 0.5);
+            --bg-color: #f2f1ee; /* Warm Paper */
+            --text-main: #1a1a1a;
+            --text-muted: #555;
             
-            --primary-color: #2563eb; /* Darker blue for better contrast on white */
-            --secondary-color: #059669; /* Darker green */
-            --accent-glow: rgba(37, 99, 235, 0.1);
-            
-            --text-main: #1e293b;
-            --text-muted: #64748b;
+            --card-bg: rgba(255, 255, 255, 0.6);
+            --card-border: rgba(0, 0, 0, 0.06);
+            --card-hover-border: rgba(20, 184, 166, 0.6);
             
             --nav-bg: rgba(255, 255, 255, 0.85);
-            --grid-line: rgba(0, 0, 0, 0.04);
-            --input-bg: rgba(255, 255, 255, 0.8);
-            --founder-bg: rgba(255, 255, 255, 0.6);
-            --shadow-color: rgba(0, 0, 0, 0.1);
-            --hero-glow-bg: rgba(37, 99, 235, 0.08);
+            --shadow-color: rgba(0, 0, 0, 0.08);
+            --accent-color: #0d9488; /* Darker teal for legibility on light */
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        *, *::before, *::after {
-            box-sizing: border-box;
-        }
+        html { scroll-behavior: smooth; }
+        *, *::before, *::after { box-sizing: border-box; }
 
         body {
             font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-main);
             margin: 0;
             padding: 0;
-            background-color: var(--bg-color);
-            /* Updated to use variable for grid lines */
-            background-image: 
-                linear-gradient(var(--grid-line) 1px, transparent 1px),
-                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-            background-size: 50px 50px;
-            color: var(--text-main);
             line-height: 1.6;
-            overflow-x: hidden;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            background-image: radial-gradient(var(--card-border) 1px, transparent 1px);
+            background-size: 40px 40px;
         }
 
+        /* Typography */
         h1, h2, h3 {
-            font-family: var(--font-heading);
+            font-family: var(--font-display);
             color: var(--text-main);
-            letter-spacing: -0.02em;
             margin-top: 0;
+            font-weight: 500;
         }
-        
-        h1 { 
-            font-size: clamp(3rem, 8vw, 5rem); 
-            line-height: 1.1; 
-            font-weight: 800;
+
+        h1 {
+            font-size: clamp(3.5rem, 8vw, 5.5rem);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
         }
-        
-        h2 { 
-            font-size: clamp(2.2rem, 5vw, 3rem); 
-            text-align: center; 
+
+        h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            text-align: center;
             margin-bottom: 3.5rem;
-            font-weight: 700;
         }
-        
-        h3 { 
-            font-size: 1.5rem; 
-            font-weight: 600;
-            line-height: 1.3;
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
         }
 
         p {
             color: var(--text-muted);
-            font-size: 1.1rem;
-            font-weight: 300;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .serif-italic {
+            font-family: var(--font-display);
+            font-style: italic;
+            color: var(--accent-color);
         }
 
         .container {
             width: 90%;
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
             position: relative;
-            z-index: 2;
         }
 
-        /* --- Components --- */
-        .text-gradient {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .cta-button {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            background: var(--text-main);
-            color: var(--bg-color);
-            padding: 1rem 2.5rem;
-            border-radius: 9999px;
-            font-weight: 600;
-            font-size: 1rem;
-            border: 1px solid transparent;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-        }
-        
-        .cta-button:hover {
-            background: transparent;
-            color: var(--text-main);
-            border-color: var(--text-main);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px -10px var(--shadow-color);
-        }
-
-        /* --- Header / Nav --- */
+        /* --- Floating Navigation --- */
         header {
             position: fixed;
-            top: 20px;
+            top: 24px;
             left: 0;
             right: 0;
             z-index: 1000;
             display: flex;
             justify-content: center;
+            pointer-events: none;
         }
 
-        header .container {
+        .nav-pill {
+            pointer-events: auto;
             background: var(--nav-bg);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--card-border);
-            border-radius: 9999px;
-            padding: 0.75rem 2.5rem;
+            border-radius: var(--radius-pill);
+            padding: 0.75rem 2rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 4px 30px var(--shadow-color);
-            max-width: 1000px;
+            box-shadow: 0 4px 20px var(--shadow-color);
             width: 90%;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
+            max-width: 900px;
+            transition: all 0.3s ease;
         }
 
-        .logo-text {
-            font-size: 1.25rem;
-            font-weight: 700;
-            letter-spacing: -0.03em;
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-main);
             text-decoration: none;
-            color: var(--text-main); /* Updated from white to variable */
-        }
-
-        nav {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
         }
 
         nav ul {
@@ -203,19 +160,17 @@
             gap: 2rem;
         }
 
-        nav ul li a {
+        nav a {
+            text-decoration: none;
+            color: var(--text-muted);
             font-size: 0.95rem;
             font-weight: 500;
-            color: var(--text-muted);
-            text-decoration: none;
             transition: color 0.2s;
         }
 
-        nav ul li a:hover {
-            color: var(--text-main);
-        }
+        nav a:hover { color: var(--accent-color); }
 
-        /* Theme Toggle Button */
+        /* Theme Toggle */
         .theme-toggle {
             background: transparent;
             border: none;
@@ -226,13 +181,11 @@
             align-items: center;
             justify-content: center;
             transition: color 0.3s ease, transform 0.3s ease;
-            border-radius: 50%;
         }
 
         .theme-toggle:hover {
-            color: var(--primary-color);
+            color: var(--accent-color);
             transform: rotate(15deg);
-            background: rgba(125, 125, 125, 0.1);
         }
 
         .theme-toggle svg {
@@ -252,208 +205,147 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            position: relative;
-            padding-top: 100px;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, var(--hero-glow-bg) 0%, transparent 70%);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 0;
-            pointer-events: none;
-            filter: blur(60px);
-            transition: background 0.5s ease;
+            padding-top: 80px;
         }
 
-        .hero h1 { margin-bottom: 1.5rem; }
-        .hero p {
-            font-size: clamp(1.1rem, 2vw, 1.3rem);
-            max-width: 750px;
+        .hero-text-container {
+            max-width: 800px;
             margin: 0 auto;
-            color: var(--text-muted);
         }
 
-        /* --- Grid & Cards --- */
-        section { padding: 120px 0; position: relative; }
+        /* --- Grids & Boxes --- */
+        section { padding: 100px 0; }
 
         .grid-container {
             display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 24px;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
         }
 
-        .modern-card {
+        .hybrid-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: var(--radius-lg);
+            border-radius: var(--radius-card);
             padding: 2.5rem;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             flex-direction: column;
-            position: relative;
-            /* Added for light mode glassmorphism */
-            backdrop-filter: blur(10px); 
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(5px);
         }
-        
-        .modern-card:hover {
-            transform: translateY(-8px);
+
+        .hybrid-card:hover {
+            transform: translateY(-5px);
             border-color: var(--card-hover-border);
-            /* Slightly different hover BG based on theme */
-            box-shadow: 0 30px 60px -15px var(--shadow-color);
+            box-shadow: 0 20px 40px -10px var(--shadow-color);
+        }
+
+        /* Icons */
+        .service-icon {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            display: inline-block;
         }
         
-        body.light-mode .modern-card:hover {
-             background: rgba(255, 255, 255, 0.9);
-        }
-
-        /* Icons Update */
-        .service-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: flex-start;
-            margin-bottom: 1.5rem;
-            color: var(--primary-color);
-        }
-
-        .service-icon svg {
-            width: 42px;
-            height: 42px;
-            stroke-width: 1.5;
-            stroke: currentColor;
-            fill: none;
-            filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.3));
-            transition: transform 0.3s ease;
-        }
-
-        .modern-card:hover .service-icon svg {
-            transform: scale(1.1);
-        }
+        .service-icon svg { width: 40px; height: 40px; stroke-width: 1.5; }
 
         /* --- Publication Links --- */
-        .study-links {
-            margin-top: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-        }
-        
         .arrow-link {
             display: flex;
-            align-items: flex-start;
             justify-content: space-between;
+            align-items: flex-start;
             text-decoration: none;
             color: var(--text-muted);
-            font-size: 0.95rem;
-            font-weight: 400;
-            transition: all 0.3s ease;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(150, 150, 150, 0.1);
-            gap: 15px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--card-border);
+            transition: 0.3s ease;
+            margin-top: 0.5rem;
         }
 
-        .arrow-link span {
-            flex: 1;
-            line-height: 1.4;
-        }
-
-        .arrow-icon {
-            width: 18px;
-            height: 18px;
-            min-width: 18px;
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), stroke 0.3s ease;
-            stroke: var(--text-muted);
-            margin-top: 3px;
-        }
+        .arrow-link span { font-size: 0.95rem; }
 
         .arrow-link:hover {
             color: var(--text-main);
-            border-bottom-color: var(--primary-color);
+            border-bottom-color: var(--accent-color);
         }
 
-        .arrow-link:hover .arrow-icon {
-            transform: translate(4px, -4px);
-            stroke: var(--primary-color);
+        .arrow-link:hover svg {
+            transform: translate(3px, -3px);
+            stroke: var(--accent-color);
         }
 
-        /* --- About & Founder (Secondary Design) --- */
-        .vision {
-            font-family: var(--font-heading);
+        /* --- About Section --- */
+        .vision-text {
+            font-family: var(--font-display);
             font-size: 2rem;
-            color: var(--text-main);
             text-align: center;
+            max-width: 800px;
             margin: 0 auto 3rem;
-            max-width: 900px;
-            line-height: 1.3;
-            font-weight: 700;
+            line-height: 1.4;
         }
 
         .founder-strip {
-            background: var(--founder-bg);
+            background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: var(--radius-md);
-            padding: 1.25rem 2rem;
-            max-width: 700px;
+            border-radius: 12px;
+            padding: 1.5rem;
+            max-width: 600px;
             margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: center; /* Center the content */
-            gap: 1.5rem;
-            transition: background 0.3s, border-color 0.3s;
+            text-align: center;
         }
 
-        .founder-info {
-            flex: 1;
-            text-align: center; /* Center the text inside the block */
+        /* --- Contact Section --- */
+        .contact-wrapper {
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .founder-title {
-            color: var(--primary-color);
-            text-transform: uppercase;
-            font-size: 0.7rem;
-            letter-spacing: 0.1em;
-            font-weight: 700;
-            margin-bottom: 0.25rem;
-            display: block;
+        form {
+            margin-top: 2rem;
         }
 
-        .founder-strip p {
-            font-size: 0.9rem;
-            margin: 0;
-            line-height: 1.5;
-            color: var(--text-main);
-            font-style: italic; /* Added italic style */
-        }
+        .form-row { margin-bottom: 1.5rem; }
 
-        /* --- Contact --- */
-        .contact-container { max-width: 600px; margin: 0 auto; }
-        .form-group { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.5rem; }
         input, textarea {
-            background: var(--input-bg);
-            border: 1px solid var(--card-border);
-            border-radius: var(--radius-md);
-            padding: 1.1rem;
-            color: var(--text-main);
-            font-size: 1rem;
-            transition: 0.2s;
+            width: 100%;
+            padding: 1rem 0;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--card-border);
             font-family: var(--font-body);
+            font-size: 1rem;
+            color: var(--text-main);
+            border-radius: 0;
+            transition: border-color 0.3s;
         }
+
         input:focus, textarea:focus {
             outline: none;
-            border-color: var(--primary-color);
-            background: rgba(255, 255, 255, 0.1); /* Slightly more visible on focus */
+            border-bottom-color: var(--accent-color);
         }
         
-        /* Fix focus bg for light mode */
-        body.light-mode input:focus, 
-        body.light-mode textarea:focus {
-             background: #ffffff;
+        input::placeholder, textarea::placeholder { color: var(--text-muted); opacity: 0.7; }
+
+        .btn-minimal {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--accent-color);
+            color: #1a1c1e;
+            padding: 1rem 2.5rem;
+            border-radius: var(--radius-pill);
+            text-decoration: none;
+            font-weight: 600;
+            border: 1px solid var(--accent-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: var(--font-body);
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+        .btn-minimal:hover {
+            background: transparent;
+            color: var(--text-main);
         }
 
         /* --- Footer --- */
@@ -462,154 +354,127 @@
             padding: 4rem 0;
             text-align: center;
             color: var(--text-muted);
-        }
-        
-        .footer-links {
-            display: flex;
-            gap: 2.5rem;
-            justify-content: center;
-            margin-top: 1.5rem;
+            font-size: 0.9rem;
         }
 
-        .footer-links a { text-decoration: none; color: inherit; transition: 0.2s; }
-        .footer-links a:hover { color: var(--primary-color); }
+        .footer-link {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-top: 1rem;
+            display: inline-block;
+        }
 
         @media (max-width: 768px) {
-            header .container { flex-direction: column; padding: 1rem; border-radius: var(--radius-lg); gap: 1rem; }
-            nav { flex-direction: column; gap: 1rem; }
-            nav ul { gap: 1rem; flex-wrap: wrap; justify-content: center;}
-            .hero h1 { font-size: 2.8rem; }
-            section { padding: 80px 0; }
-            .founder-strip { flex-direction: column; text-align: center; }
-            
-            /* Adjust toggle position on mobile */
-            .theme-toggle { position: absolute; right: 20px; top: 20px; }
+            .nav-pill { flex-direction: column; gap: 1rem; border-radius: 24px; padding: 1.5rem; }
+            nav ul { gap: 1rem; font-size: 0.9rem; flex-wrap: wrap; justify-content: center; }
+            .hero h1 { font-size: 3rem; }
+            .theme-toggle { position: absolute; top: 20px; right: 20px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header/Navigation -->
+    <!-- Header -->
     <header>
-        <div class="container">
-            <a href="#home" class="logo-text">
-                ChemCore<span class="text-gradient">AI</span>
-            </a>
+        <div class="nav-pill">
+            <a href="#home" class="logo">ChemCoreAI</a>
             <nav>
                 <ul>
                     <li><a href="#home">Home</a></li>
-                    <li><a href="#services">Capabilities</a></li>
-                    <li><a href="#implemented-solutions">Solutions</a></li>
-                    <li><a href="#about">About</a></li>
+                    <li><a href="#capabilities">Capabilities</a></li>
+                    <li><a href="#solutions">Solutions</a></li>
+                    <li><a href="#vision">Vision</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
-                
-                <!-- Theme Toggle Button -->
-                <button id="theme-toggle" class="theme-toggle" aria-label="Switch Theme">
-                    <!-- Default to Sun Icon (since we start in dark mode) -->
-                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                    <!-- Moon Icon (Hidden initially) -->
-                    <svg class="moon-icon" style="display: none;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                </button>
             </nav>
+            
+            <button id="theme-toggle" class="theme-toggle" aria-label="Switch Theme">
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="moon-icon" style="display: none;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section id="home" class="hero">
-        <div class="container">
-            <h1>Chemistry meets <span class="text-gradient">AI</span></h1>
+        <div class="container hero-text-container">
+            <h1>Chemistry meets <br><span class="serif-italic">Artificial Intelligence</span></h1>
             <p>Accelerating chemical innovation through predictive modelling, automated workflows, and chemoinformatics.</p>
         </div>
     </section>
 
-    <!-- Capabilities Section -->
-    <section id="services">
+    <!-- Capabilities -->
+    <section id="capabilities">
         <div class="container">
             <h2>Capabilities</h2>
             <div class="grid-container">
-                
-                <!-- QSAR/QSRR Card -->
-                <div class="modern-card">
+                <div class="hybrid-card">
                     <span class="service-icon">
-                        <!-- Benzene Ring Icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 2L20.66 7V17L12 22L3.34 17V7L12 2Z"></path>
-                            <circle cx="12" cy="12" r="5"></circle>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
                         </svg>
                     </span>
                     <h3>QSAR/QSRR Modelling</h3>
-                    <p>Delivering predictive models for biological activity, toxicity, chromatographic behavior, and other molecular properties.</p>
+                    <p>Delivering predictive models for biological activity, toxicity, molecular properties and chromatographic behavior. Mapping molecular structure to property via mathematical descriptors.</p>
                 </div>
 
-                <!-- Process Optimization Card -->
-                <div class="modern-card">
+                <div class="hybrid-card">
                     <span class="service-icon">
-                        <!-- Wrench Tool Icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
                     </span>
                     <h3>Process Optimization</h3>
                     <p>Leveraging data science and machine learning to analyze batch and continuous process data for yield optimization and failure reduction.</p>
                 </div>
+            </div>
+        </div>
     </section>
 
-    <!-- Implemented Solutions Section -->
-    <section id="implemented-solutions">
+    <!-- Solutions -->
+    <section id="solutions">
         <div class="container">
             <h2>Implemented Solutions</h2>
-            
             <div class="grid-container">
-                <div class="modern-card">
+                <div class="hybrid-card">
                     <h3>QSAR Model Development (AlvaScience)</h3>
-                    <p>Designing and validating property prediction models using molecular descriptors and machine learning. Building reproducible cheminformatics pipelines for QSAR modelling, including descriptor calculation, feature selection, and model validation.</p>
+                    <p>Building reproducible cheminformatics pipelines for QSAR modelling, including descriptor calculation, feature selection, and model validation.</p>
                 </div>
                 
-                <div class="modern-card">
+                <div class="hybrid-card">
                     <h3>Manufacturing Optimization (Cambrex)</h3>
                     <p>Applying data science and chemometric analysis to QC and production data to monitor failure rates and identify critical trends.</p>
                 </div>
 
-                <div class="modern-card">
-                    <h3>QSRR for chromatography (UGent)</h3>
-                    <p>Built ML pipelines for retention time prediction and chromatographic behavior of pollutants using molecular descriptors. Integrated Python-based tools for structure standardization, data wrangling, and structure-property modelling.</p>
+                <div class="hybrid-card">
+                    <h3>QSRR for Chromatography (UGent)</h3>
+                    <p>Built ML pipelines for retention time prediction. Integrated tools for structure standardization and data wrangling.</p>
                     
-                    <div class="study-links">
+                    <div style="margin-top: 1.5rem;">
                         <a href="https://link.springer.com/article/10.1186/s13321-024-00873-6" target="_blank" class="arrow-link">
                             <span>QSRR for novel HPLC columns</span>
-                            <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                <line x1="7" y1="17" x2="17" y2="7"></line>
-                                <polyline points="7 7 17 7 17 17"></polyline>
-                            </svg>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
                         </a>
-                        
-                        <a href="https://www.sciencedirect.com/science/article/abs/pii/S0165993625000755" target="_blank" class="arrow-link">
-                            <span>Review on molecular descriptors for QSRR</span>
-                            <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                <line x1="7" y1="17" x2="17" y2="7"></line>
-                                <polyline points="7 7 17 7 17 17"></polyline>
-                            </svg>
+                        <a href="https://analyticalsciencejournals.onlinelibrary.wiley.com/doi/abs/10.1002/jssc.201700445" target="_blank" class="arrow-link">
+                            <span>Retention time prediction in HPLC</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
                         </a>
-                        
-                        <a href="https://pubs.acs.org/doi/abs/10.1021/acs.analchem.4c01784" target="_blank" class="arrow-link">
-                            <span>QSRR to aid unknown identification with MS</span>
-                            <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                <line x1="7" y1="17" x2="17" y2="7"></line>
-                                <polyline points="7 7 17 7 17 17"></polyline>
-                            </svg>
+                        <a href="#" target="_blank" class="arrow-link">
+                            <span>Review on molecular descriptors</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
                         </a>
                     </div>
                 </div>
@@ -618,38 +483,32 @@
     </section>
 
     <!-- About Section -->
-    <section id="about">
+    <section id="vision">
         <div class="container">
             <h2>Vision</h2>
-            <div class="vision">ChemCoreAI translates chemical data into reliable, actionable intelligence for innovation.</div>
+            <div class="vision-text">ChemCoreAI translates chemical data into reliable, actionable intelligence for innovation.</div>
 
             <div class="founder-strip">
-                <div class="founder-info">
-                    <span class="founder-title">The Founder</span>
-                    <p>Every engagement is directed by a specialist in analytical chemistry and data science, bridging the gap between laboratory and computational.</p>
-                </div>
+                <p style="margin: 0; font-style: italic; color: var(--text-main);">Every engagement is directed by a specialist in analytical chemistry and data science, bridging the gap between laboratory and computational.</p>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contact -->
     <section id="contact">
-        <div class="container contact-container">
-            <h2>Connect with ChemCoreAI</h2>
-            <form>
-                <div class="form-group">
-                    <label style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">Name</label>
+        <div class="container contact-wrapper">
+            <h2>Get in touch</h2>
+            <form id="contact-form">
+                <div class="form-row">
                     <input type="text" placeholder="Full Name" required>
                 </div>
-                <div class="form-group">
-                    <label style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">Email</label>
+                <div class="form-row">
                     <input type="email" placeholder="name@company.com" required>
                 </div>
-                <div class="form-group">
-                    <label style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">Message</label>
-                    <textarea rows="4" placeholder="How can ChemCoreAI support your project goals?" required></textarea>
+                <div class="form-row">
+                    <textarea rows="4" placeholder="How can ChemCoreAI support your project?" required></textarea>
                 </div>
-                <button type="submit" class="cta-button" style="width: 100%;">Send Inquiry</button>
+                <button type="submit" class="btn-minimal">Send Inquiry</button>
             </form>
         </div>
     </section>
@@ -658,20 +517,17 @@
     <footer>
         <div class="container">
             <p>&copy; 2025 ChemCoreAI. Based in Milan, Italy.</p>
-            <div class="footer-links">
-                <a href="mailto:contact@chemcoreai.com">contact@chemcoreai.com</a>
-            </div>
+            <a href="mailto:contact@chemcoreai.com" class="footer-link">contact@chemcoreai.com</a>
         </div>
     </footer>
 
-    <!-- Theme Switcher Script -->
+    <!-- Scripts -->
     <script>
         const themeToggleBtn = document.getElementById('theme-toggle');
         const sunIcon = document.querySelector('.sun-icon');
         const moonIcon = document.querySelector('.moon-icon');
         const body = document.body;
 
-        // Check for saved preference
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'light') {
             enableLightMode();
@@ -688,7 +544,6 @@
         function enableLightMode() {
             body.classList.add('light-mode');
             localStorage.setItem('theme', 'light');
-            // Show Moon (to switch back to dark), Hide Sun
             sunIcon.style.display = 'none';
             moonIcon.style.display = 'block';
         }
@@ -696,10 +551,26 @@
         function disableLightMode() {
             body.classList.remove('light-mode');
             localStorage.setItem('theme', 'dark');
-            // Show Sun (to switch to light), Hide Moon
             sunIcon.style.display = 'block';
             moonIcon.style.display = 'none';
         }
+
+        // Form handling stub
+        document.getElementById('contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            // In a real app, this would send data to a backend.
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerText;
+            btn.innerText = "Message Received";
+            btn.style.opacity = "0.7";
+            btn.disabled = true;
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.style.opacity = "1";
+                btn.disabled = false;
+                e.target.reset();
+            }, 3000);
+        });
     </script>
 </body>
 </html>
