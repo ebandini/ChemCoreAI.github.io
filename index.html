@@ -93,7 +93,11 @@
         .arrow-link:hover svg { transform: translate(3px, -3px); stroke: var(--accent-color); }
 
         .vision-text { font-family: var(--font-display); font-size: 2rem; text-align: center; max-width: 800px; margin: 0 auto 3rem; line-height: 1.4; }
-        .founder-strip { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; max-width: 600px; margin: 0 auto; text-align: center; }
+        
+        .founder-profile { max-width: 800px; margin: 0 auto; display: flex; gap: 3rem; align-items: center; text-align: left; }
+        .founder-info h3 { margin-bottom: 0.5rem; }
+        .founder-info .role { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-color); font-weight: 600; margin-bottom: 1rem; display: block; }
+        .founder-info p { font-size: 1rem; margin-bottom: 1.5rem; }
 
         .contact-wrapper { max-width: 600px; margin: 0 auto; text-align: center; }
         
@@ -110,6 +114,7 @@
             nav ul { gap: 1rem; font-size: 0.9rem; flex-wrap: wrap; justify-content: center; }
             .hero h1 { font-size: 3rem; }
             .theme-toggle { position: absolute; top: 20px; right: 20px; }
+            .founder-profile { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
@@ -167,8 +172,12 @@
                 </div>
                 <div class="hybrid-card">
                     <span class="service-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke-width="1.5"/>
+                            <path d="M12 18V12M12 12L8 8M12 12L16 8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="12" cy="12" r="2" fill="currentColor"/>
+                            <circle cx="8" cy="8" r="1.5" fill="currentColor"/>
+                            <circle cx="16" cy="8" r="1.5" fill="currentColor"/>
                         </svg>
                     </span>
                     <h3>Bridging Lab and Code</h3>
@@ -212,8 +221,15 @@
         <div class="container">
             <h2>Vision</h2>
             <div class="vision-text">ChemCoreAI translates chemical data into reliable, actionable intelligence for innovation.</div>
-            <div class="founder-strip">
-                <p style="margin: 0; font-style: italic; color: var(--text-main);">Bridging the gap between laboratory results and computational intelligence.</p>
+            
+            <!-- About the Founder -->
+            <div class="founder-profile">
+                <div class="founder-info">
+                    <span class="role">Founder & Principal Consultant</span>
+                    <h3>Elena Bandini, PhD</h3>
+                    <p>A chemist with a foundation in analytical chemistry and chemoinformatics. Specialized in transforming laboratory logic into scalable computational solutions. With a PhD from Ghent University focused on ML pipelines for retention time prediction and chromatographic behavior, bridging the gap between raw chemical data and actionable structure-property insights.</p>
+                    <p style="font-style: italic;">"I believe the future of chemistry lies in the integration of laboratory precision and artificial intelligence."</p>
+                </div>
             </div>
         </div>
     </section>
