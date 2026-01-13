@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChemCoreAI</title>
+    
+    <!-- Stylistic Favicon (Hexagon 'Benzene' Core Logo) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%232dd4bf' stroke-width='10' stroke-linecap='round' stroke-linejoin='round'><path d='M50 10 L85 30 L85 70 L50 90 L15 70 L15 30 Z' /><circle cx='50' cy='50' r='12' fill='%232dd4bf' stroke='none'/></svg>">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- Hybrid Design System --- */
+        :root {
+            --bg-color: #1a1c1e;
+            --text-main: #f0f0f0;
+            --text-muted: #94a3b8;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --card-hover-border: rgba(45, 212, 191, 0.4);
+            --nav-bg: rgba(30, 32, 35, 0.8);
+            --accent-color: #2dd4bf;
+            --shadow-color: rgba(0, 0, 0, 0.4);
+            --font-display: 'Newsreader', serif;
+            --font-body: 'Inter', sans-serif;
+            --radius-pill: 9999px;
+            --radius-card: 16px;
+        }
+
+        body.light-mode {
+            --bg-color: #f2f1ee;
+            --text-main: #1a1a1a;
+            --text-muted: #555;
+            --card-bg: rgba(255, 255, 255, 0.6);
+            --card-border: rgba(0, 0, 0, 0.06);
+            --card-hover-border: rgba(20, 184, 166, 0.6);
+            --nav-bg: rgba(255, 255, 255, 0.85);
+            --shadow-color: rgba(0, 0, 0, 0.08);
+            --accent-color: #0d9488;
+        }
+
+        html { scroll-behavior: smooth; }
+        *, *::before, *::after { box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            background-image: radial-gradient(var(--card-border) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        h1, h2, h3 { font-family: var(--font-display); color: var(--text-main); margin-top: 0; font-weight: 500; }
+        h1 { font-size: clamp(3.5rem, 8vw, 5.5rem); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+        h2 { font-size: clamp(2rem, 5vw, 3rem); text-align: center; margin-bottom: 3.5rem; }
+        h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+        h4 { font-family: var(--font-body); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent-color); margin-top: 0; margin-bottom: 0.5rem; }
+        p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.7; }
+
+        .serif-italic { font-family: var(--font-display); font-style: italic; color: var(--accent-color); }
+        .container { width: 90%; max-width: 1100px; margin: 0 auto; position: relative; }
+
+        header { position: fixed; top: 24px; left: 0; right: 0; z-index: 1000; display: flex; justify-content: center; pointer-events: none; }
+        .nav-pill { pointer-events: auto; background: var(--nav-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--card-border); border-radius: var(--radius-pill); padding: 0.75rem 2rem; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 20px var(--shadow-color); width: 90%; max-width: 900px; transition: all 0.3s ease; }
+        .logo { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; color: var(--text-main); text-decoration: none; }
+        nav ul { display: flex; list-style: none; margin: 0; padding: 0; gap: 2rem; }
+        nav a { text-decoration: none; color: var(--text-muted); font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
+        nav a:hover { color: var(--accent-color); }
+
+        .theme-toggle { background: transparent; border: none; cursor: pointer; color: var(--text-muted); padding: 5px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
+        .theme-toggle:hover { color: var(--accent-color); transform: rotate(15deg); }
+        .theme-toggle svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding-top: 80px; }
+        .hero-text-container { max-width: 800px; margin: 0 auto; }
+
+        section { padding: 100px 0; }
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 24px; }
+        
+        .hybrid-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-card); padding: 2.5rem; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; backdrop-filter: blur(5px); }
+        .hybrid-card:hover { transform: translateY(-5px); border-color: var(--card-hover-border); box-shadow: 0 20px 40px -10px var(--shadow-color); }
+        
+        .service-icon { color: var(--accent-color); margin-bottom: 1.5rem; display: inline-block; }
+        .service-icon svg { width: 40px; height: 40px; stroke-width: 1.5; }
+
+        /* --- FLIP CARD STYLES --- */
+        .flip-card-wrapper {
+            background-color: transparent;
+            perspective: 1000px; /* Creates the 3D depth */
+            height: 460px; /* Fixed height required for absolute positioning of faces */
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: left;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Nice bouncy effect */
+            transform-style: preserve-3d;
+        }
+
+        .flip-card-wrapper:hover .flip-card-inner,
+        .flip-card-wrapper.hover-active .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: var(--radius-card);
+            padding: 2.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(5px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .flip-card-front {
+            z-index: 2;
+        }
+
+        /* Hover effect specifically for the card faces to light up the border */
+        .flip-card-wrapper:hover .flip-card-front, 
+        .flip-card-wrapper:hover .flip-card-back {
+            border-color: var(--card-hover-border);
+        }
+
+        .flip-card-back {
+            transform: rotateY(180deg);
+            background: rgba(30, 32, 35, 0.95); /* Slightly more opaque for reading technical text */
+            overflow-y: auto; /* Scroll if technical details are too long */
+        }
+        
+        body.light-mode .flip-card-back {
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .flip-indicator {
+            margin-top: auto;
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0.8;
+        }
+
+        .tech-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        .tech-list li {
+            margin-bottom: 0.75rem;
+            position: relative;
+            padding-left: 1.25rem;
+        }
+        .tech-list li::before {
+            content: "•";
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* --- End Flip Card Styles --- */
+
+
+        .arrow-link { display: flex; justify-content: space-between; align-items: flex-start; text-decoration: none; color: var(--text-muted); padding: 12px 0; border-bottom: 1px solid var(--card-border); transition: 0.3s ease; margin-top: 0.5rem; font-size: 0.9rem; }
+        .arrow-link:hover { color: var(--text-main); border-bottom-color: var(--accent-color); }
+        .arrow-link:hover svg { transform: translate(3px, -3px); stroke: var(--accent-color); }
+
+        .vision-text { font-family: var(--font-display); font-size: 2rem; text-align: center; max-width: 800px; margin: 0 auto 3rem; line-height: 1.4; }
+        
+        .founder-profile { max-width: 800px; margin: 0 auto; display: flex; gap: 3rem; align-items: center; text-align: left; }
+        .founder-info h3 { margin-bottom: 0.5rem; display: flex; align-items: center; gap: 12px; }
+        .founder-info .role { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-color); font-weight: 600; margin-bottom: 1rem; display: block; }
+        .founder-info p { font-size: 1rem; margin-bottom: 1.5rem; }
+        
+        .founder-link-icon { color: var(--text-muted); transition: all 0.2s ease; display: inline-flex; }
+        .founder-link-icon:hover { color: var(--accent-color); transform: translateY(-2px); }
+        .founder-link-icon svg { width: 22px; height: 22px; stroke-width: 1.5; }
+
+        .contact-wrapper { max-width: 600px; margin: 0 auto; text-align: center; }
+        
+        input, textarea { width: 100%; padding: 1rem 0; background: transparent; border: none; border-bottom: 1px solid var(--card-border); font-family: var(--font-body); font-size: 1rem; color: var(--text-main); border-radius: 0; transition: border-color 0.3s; margin-bottom: 1.5rem; }
+        input:focus, textarea:focus { outline: none; border-bottom-color: var(--accent-color); }
+        .btn-minimal { background: var(--accent-color); color: #1a1c1e; padding: 1rem 2.5rem; border-radius: var(--radius-pill); text-decoration: none; font-weight: 600; border: 1px solid var(--accent-color); cursor: pointer; transition: all 0.3s ease; font-family: var(--font-body); width: 100%; }
+        .btn-minimal:hover { background: transparent; color: var(--text-main); }
+
+        footer { border-top: 1px solid var(--card-border); padding: 4rem 0; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
+        
+        .social-links { display: flex; justify-content: center; gap: 2rem; margin-top: 1.5rem; }
+        .social-icon-link { color: var(--text-muted); transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center; }
+        .social-icon-link:hover { color: var(--accent-color); transform: translateY(-3px); }
+        .social-icon-link svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+        @media (max-width: 768px) {
+            .nav-pill { flex-direction: column; gap: 1rem; border-radius: 24px; padding: 1.5rem; }
+            nav ul { gap: 1rem; font-size: 0.9rem; flex-wrap: wrap; justify-content: center; }
+            .hero h1 { font-size: 3rem; }
+            .theme-toggle { position: absolute; top: 20px; right: 20px; }
+            .founder-profile { flex-direction: column; text-align: center; }
+            .founder-info h3 { justify-content: center; }
+            /* Adjust flip card height for mobile if needed, though 460px is usually safe */
+            .flip-card-wrapper { height: 500px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-pill">
+            <a href="#home" class="logo">ChemCoreAI</a>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#capabilities">Capabilities</a></li>
+                    <li><a href="#solutions">Solutions</a></li>
+                    <li><a href="#vision">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Switch Theme">
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg class="moon-icon" style="display: none;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container hero-text-container">
+            <h1>Chemistry meets <br><span class="serif-italic">Artificial Intelligence</span></h1>
+            <p>Accelerating chemical innovation through predictive modelling, automated workflows, and chemoinformatics.</p>
+        </div>
+    </section>
+
+    <!-- Capabilities -->
+    <section id="capabilities">
+        <div class="container">
+            <h2>Capabilities</h2>
+            <div class="grid-container">
+                <div class="hybrid-card">
+                    <span class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                        </svg>
+                    </span>
+                    <h3>QSAR/QSRR Modelling</h3>
+                    <p>Delivering predictive models for biological activity, toxicity, and molecular properties. Mapping molecular structure to property via mathematical descriptors.</p>
+                </div>
+                <div class="hybrid-card">
+                    <span class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                    </span>
+                    <h3>Process Optimization</h3>
+                    <p>Analyzing production data for yield optimization and failure reduction using advanced machine learning models.</p>
+                </div>
+                <div class="hybrid-card">
+                    <span class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke-width="1.5"/>
+                            <path d="M12 18V12M12 12L8 8M12 12L16 8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="12" cy="12" r="2" fill="currentColor"/>
+                            <circle cx="8" cy="8" r="1.5" fill="currentColor"/>
+                            <circle cx="16" cy="8" r="1.5" fill="currentColor"/>
+                        </svg>
+                    </span>
+                    <h3>Bridging Lab and Code</h3>
+                    <p>Implementation of the coding capabilities into LLMs to make easier the integration of laboratory workflows with computational tools.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions (Updated with Flip Cards) -->
+    <section id="solutions">
+        <div class="container">
+            <h2>Implemented Solutions</h2>
+            <div class="grid-container">
+                
+                <!-- CARD 1: QSAR Model -->
+                <div class="flip-card-wrapper">
+                    <div class="flip-card-inner">
+                        <!-- FRONT -->
+                        <div class="flip-card-front">
+                            <h3>QSAR Model Development</h3>
+                            <p>Building reproducible cheminformatics pipelines for QSAR modelling and model validation.</p>
+                            
+                            <div class="flip-indicator">
+                                <span>Technical Details</span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8l4 4-4 4M8 12h8"/></svg>
+                            </div>
+                        </div>
+                        
+                        <!-- BACK -->
+                        <div class="flip-card-back">
+                            <h4>Implementation Specs</h4>
+                            <ul class="tech-list">
+                                <li>Descriptor Calculation: use of AlvaScience for molecule dataset cleaning and standardization, molecular descriptors calculation, and fingerprint calculation.</li>
+                                <li>Feature Selection: filtering methods are combined with embedded method to reduce to the dataset to the most important features for the endpoint.</li>
+                                <li>Models: different models tested and compared for classification task. Spanning from LDA, QDA to more complex tree-ensemble algorithms such as Random Forest.</li>
+                                <li>Validation: cross-validation and external test set validation.</li>
+                                <li>Deployment: models used in software for QSAR.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 2: Manufacturing -->
+                <div class="flip-card-wrapper">
+                    <div class="flip-card-inner">
+                        <!-- FRONT -->
+                        <div class="flip-card-front">
+                            <h3>Manufacturing Optimization</h3>
+                            <p>Monitoring failure rates and identifying critical trends in production data via chemometric analysis.</p>
+
+                            <div class="flip-indicator">
+                                <span>Technical Details</span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8l4 4-4 4M8 12h8"/></svg>
+                            </div>
+                        </div>
+
+                        <!-- BACK -->
+                        <div class="flip-card-back">
+                            <h4>Implementation Specs</h4>
+                            <ul class="tech-list">
+                                <li>Data recollection and cleaning: standardization of the data and handling of missing values, incorrect values etc.</li>
+                                <li>EDA pipeline: data analysis using basic statistic and multivariate analysis such as PCA for batch evolution modelling.</li>
+                                <li>Root Cause Analysis: identification of critical process parameters affecting out-of-specification values of a variable in API synthesis.</li>
+                                <li>Results: data-driven decision to address next experiments and steps to solve the problem.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 3: QSRR -->
+                <div class="flip-card-wrapper">
+                    <div class="flip-card-inner">
+                        <!-- FRONT -->
+                        <div class="flip-card-front">
+                            <h3>QSRR for Chromatography</h3>
+                            <p>Building ML pipelines for retention time prediction using standardized chemical structures.</p>
+
+                            <div class="flip-indicator">
+                                <span>Technical Details</span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8l4 4-4 4M8 12h8"/></svg>
+                            </div>
+                        </div>
+
+                        <!-- BACK -->
+                        <div class="flip-card-back">
+                            <h4>Implementation Specs</h4>
+                            <ul class="tech-list">
+                                <li>Dataset Curation: building and curation of datasets of molecules, chromatography and mass spectrometry data, and molecular descriptors.</li>
+                                <li>Feature Selection: development of a feature selection pipeline to ensure reliable and significative results, combining filtering and embedded techniques.</li>
+                                <li>Algorithm: different algorithms including ensemble learning (XGBoost) optimization for non-linear chromatographic relationships.</li>
+                                <li>Results: better understanding of the retention mechanism and reduction of false candidate for MS unknown analyses.</li>
+                            </ul>
+                            
+                            <div style="margin-top: auto;">
+                                <a href="https://link.springer.com/article/10.1186/s13321-024-00873-6" target="_blank" class="arrow-link">
+                                    <span>QSRR for novel HPLC columns</span>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                                </a>
+                                <a href="https://analyticalsciencejournals.onlinelibrary.wiley.com/doi/abs/10.1002/jssc.201700445" target="_blank" class="arrow-link">
+                                    <span>Retention time prediction in HPLC</span>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="vision">
+        <div class="container">
+            <h2>Vision</h2>
+            <div class="vision-text">ChemCoreAI translates chemical data into reliable, actionable intelligence for innovation.</div>
+            
+            <!-- About the Founder -->
+            <div class="founder-profile">
+                <div class="founder-info">
+                    <span class="role">Founder & Principal Scientist</span>
+                    <h3>
+                        Elena Bandini, PhD
+                        <a href="https://www.linkedin.com/in/elenabandini/?locale=en-US" target="_blank" class="founder-link-icon" aria-label="Elena Bandini LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                        </a>
+                    </h3>
+                    <p>Chemist with a foundation in analytical chemistry and chemoinformatics. Specialized in transforming laboratory logic into scalable computational solutions. With a PhD from Ghent University focused on ML pipelines for retention time prediction and chromatographic behavior, bridging the gap between raw chemical data and actionable structure-property insights.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container contact-wrapper">
+            <h2>Get in touch</h2>
+            <form id="contact-form" action="https://formsubmit.co/contact@chemcoreai.com" method="POST">
+                <!-- Data fields -->
+                <input type="text" name="name" placeholder="Full Name" required>
+                <input type="email" name="email" placeholder="name@company.com" required>
+                <textarea name="message" rows="4" placeholder="How can ChemCoreAI support your project?" required></textarea>
+                
+                <!-- Optimization fields -->
+                <input type="text" name="_honey" style="display:none">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_subject" value="New Inquiry from ChemCoreAI Website">
+                
+                <button type="submit" class="btn-minimal">Send Inquiry</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 ChemCoreAI. Based in Milan, Italy.</p>
+            
+            <div class="social-links">
+                <!-- Email -->
+                <a href="mailto:contact@chemcoreai.com" class="social-icon-link" aria-label="Email Us">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </a>
+                
+                <!-- Company LinkedIn -->
+                <a href="https://www.linkedin.com/company/chemcoreai/" target="_blank" class="social-icon-link" aria-label="Company LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const sunIcon = document.querySelector('.sun-icon');
+        const moonIcon = document.querySelector('.moon-icon');
+        const body = document.body;
+
+        if (localStorage.getItem('theme') === 'light') enableLightMode();
+
+        themeToggleBtn.addEventListener('click', () => {
+            body.classList.contains('light-mode') ? disableLightMode() : enableLightMode();
+        });
+
+        function enableLightMode() {
+            body.classList.add('light-mode');
+            localStorage.setItem('theme', 'light');
+            sunIcon.style.display = 'none';
+            moonIcon.style.display = 'block';
+        }
+
+        function disableLightMode() {
+            body.classList.remove('light-mode');
+            localStorage.setItem('theme', 'dark');
+            sunIcon.style.display = 'block';
+            moonIcon.style.display = 'none';
+        }
+
+        // Add touch toggle support for mobile devices where hover isn't reliable
+        document.querySelectorAll('.flip-card-wrapper').forEach(card => {
+            card.addEventListener('click', function() {
+                this.classList.toggle('hover-active');
+            });
+        });
+    </script>
+</body>
+</html>
