@@ -96,6 +96,7 @@
             background-color: transparent;
             perspective: 1000px; /* Creates the 3D depth */
             height: 460px; /* Fixed height required for absolute positioning of faces */
+            cursor: pointer; /* Indicates interactivity */
         }
 
         .flip-card-inner {
@@ -107,8 +108,8 @@
             transform-style: preserve-3d;
         }
 
-        .flip-card-wrapper:hover .flip-card-inner,
-        .flip-card-wrapper.hover-active .flip-card-inner {
+        /* CHANGED: Removed :hover selector, replaced with .flipped class */
+        .flip-card-wrapper.flipped .flip-card-inner {
             transform: rotateY(180deg);
         }
 
@@ -125,13 +126,14 @@
             backdrop-filter: blur(5px);
             display: flex;
             flex-direction: column;
+            transition: border-color 0.3s ease;
         }
 
         .flip-card-front {
             z-index: 2;
         }
 
-        /* Hover effect specifically for the card faces to light up the border */
+        /* Keep the border hover effect to show the card is active/ready to click */
         .flip-card-wrapper:hover .flip-card-front, 
         .flip-card-wrapper:hover .flip-card-back {
             border-color: var(--card-hover-border);
@@ -478,10 +480,14 @@
             moonIcon.style.display = 'none';
         }
 
-        // Add touch toggle support for mobile devices where hover isn't reliable
+        // UPDATED: Click-only flip functionality
         document.querySelectorAll('.flip-card-wrapper').forEach(card => {
-            card.addEventListener('click', function() {
-                this.classList.toggle('hover-active');
+            card.addEventListener('click', function(e) {
+                // Prevent flip if clicking on a link inside the card
+                if (e.target.closest('a')) return;
+                
+                // Toggle the flipped class
+                this.classList.toggle('flipped');
             });
         });
     </script>
