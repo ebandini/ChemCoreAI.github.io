@@ -84,7 +84,8 @@
 
         section { padding: 100px 0; }
         .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 24px; }
-        
+        #capabilities .grid-container, #solutions .grid-container { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 900px; margin: 0 auto; }
+
         .hybrid-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-card); padding: 2.5rem; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; backdrop-filter: blur(5px); }
         .hybrid-card:hover { transform: translateY(-5px); border-color: var(--card-hover-border); box-shadow: 0 20px 40px -10px var(--shadow-color); }
         
@@ -179,6 +180,23 @@
             font-weight: bold;
         }
 
+        .partner-row { margin-top: 1.5rem; }
+        .partner-label { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.65rem; }
+        .partner-logos { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+        .logo-chip { background: #fff; border-radius: 8px; padding: 6px 12px; display: inline-flex; align-items: center; height: 42px; box-shadow: 0 2px 8px rgba(0,0,0,0.12); text-decoration: none; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        a.logo-chip:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.2); }
+        .logo-chip img { height: 26px; width: auto; display: block; }
+
+        .testimonial-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; max-width: 900px; margin: 0 auto 3.5rem; }
+        .testimonial-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-card); padding: 2.5rem; backdrop-filter: blur(5px); display: flex; flex-direction: column; }
+        .testimonial-card .quote-mark { font-family: Georgia, serif; font-size: 3rem; line-height: 0.6; height: 1.4rem; color: var(--accent-color); opacity: 0.55; }
+        .testimonial-quote { font-size: 1.05rem; line-height: 1.6; color: var(--text-main); margin: 0 0 1.5rem; flex-grow: 1; }
+        .testimonial-card.placeholder .testimonial-quote { color: var(--text-muted); font-style: italic; opacity: 0.7; }
+        .testimonial-author { font-weight: 600; color: var(--text-main); }
+        .testimonial-role { font-size: 0.9rem; color: var(--text-muted); }
+        .network-strip { text-align: center; }
+        .network-strip .partner-logos { justify-content: center; }
+
         /* --- End Flip Card Styles --- */
 
 
@@ -220,6 +238,8 @@
             .founder-info h3 { justify-content: center; }
             /* Adjust flip card height for mobile if needed, though 460px is usually safe */
             .flip-card-wrapper { height: 500px; }
+            #capabilities .grid-container, #solutions .grid-container { grid-template-columns: 1fr; }
+            .testimonial-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -287,6 +307,15 @@
                     </span>
                     <h3>Bridging Lab and Code</h3>
                     <p>Implementation of the coding capabilities into LLMs to make easier the integration of laboratory workflows with computational tools.</p>
+                </div>
+                <div class="hybrid-card">
+                    <span class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
+                        </svg>
+                    </span>
+                    <h3>Training</h3>
+                    <p>Upskilling students and R&D teams in machine learning and cheminformatics. Hands-on workshops on AI to embed computational methods into laboratory research.</p>
                 </div>
             </div>
         </div>
@@ -391,6 +420,80 @@
                     </div>
                 </div>
 
+                <!-- CARD 4: MSCA Training -->
+                <div class="flip-card-wrapper">
+                    <div class="flip-card-inner">
+                        <!-- FRONT -->
+                        <div class="flip-card-front">
+                            <h3>AI for Wet-Lab Scientists Training</h3>
+                            <p>Lecture taking doctoral researchers from clean chemical data to deployed AI tools.</p>
+
+                            <div class="partner-row">
+                                <div class="partner-label">Delivered for</div>
+                                <div class="partner-logos">
+                                    <span class="logo-chip"><img src="SeaChem-logo-transparent.png" alt="SEACHEM MSCA network logo"></span>
+                                    <span class="logo-chip"><img src="INCLUDE-logo-transparent.png" alt="INCLUE MSCA network logo"></span>
+                                </div>
+                            </div>
+
+                            <div class="flip-indicator">
+                                <span>Technical Details</span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8l4 4-4 4M8 12h8"/></svg>
+                            </div>
+                        </div>
+
+                        <!-- BACK -->
+                        <div class="flip-card-back">
+                            <h4>Course Outline</h4>
+                            <ul class="tech-list">
+                                <li>Delivered to the SEACHEM and INCLUE MSCA doctoral networks: a 4-hour course across 3 modules, from clean data to deployed AI tools.</li>
+                                <li>Module 1 - Data Cleaning: building a clean data foundation through collection, standardization, and unit and naming harmonization.</li>
+                                <li>Module 2 - Data Analysis: EDA and multivariate analysis (PCA), the supervised ML workflow, and models for yield, failure rate, and root-cause analysis.</li>
+                                <li>Module 3 - Cheminformatics: turning molecules into descriptors and fingerprints for QSAR/QSPR/QSRR property and retention-time prediction, with applicability domain.</li>
+                                <li>Outcome: researchers able to build reproducible ML pipelines from clean data.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials & Networks -->
+    <section id="testimonials">
+        <div class="container">
+            <h2>Testimonials</h2>
+
+            <!--
+                TO ADD A REVIEW: replace the placeholder text below.
+                1) Put the quote inside <p class="testimonial-quote">…</p>
+                2) Fill in the name in <span class="testimonial-author">…</span>
+                3) Fill in role + organisation in <span class="testimonial-role">…</span>
+                4) Remove the word "placeholder" from class="testimonial-card placeholder"
+                Delete the second card if you only have one review.
+            -->
+            <div class="testimonial-grid">
+                <div class="testimonial-card placeholder">
+                    <span class="quote-mark">&ldquo;</span>
+                    <p class="testimonial-quote">Your first testimonial will appear here.</p>
+                    <span class="testimonial-author">Name</span>
+                    <span class="testimonial-role">Role, Organisation</span>
+                </div>
+                <div class="testimonial-card placeholder">
+                    <span class="quote-mark">&ldquo;</span>
+                    <p class="testimonial-quote">Your second testimonial will appear here.</p>
+                    <span class="testimonial-author">Name</span>
+                    <span class="testimonial-role">Role, Organisation</span>
+                </div>
+            </div>
+
+            <div class="network-strip">
+                <div class="partner-label">Trusted by</div>
+                <div class="partner-logos">
+                    <a class="logo-chip" href="https://sea-chem.eu/" target="_blank" rel="noopener" aria-label="SEACHEM MSCA network website (opens in new tab)"><img src="SeaChem-logo-transparent.png" alt="SEACHEM MSCA network logo"></a>
+                    <a class="logo-chip" href="https://inclue.eu/" target="_blank" rel="noopener" aria-label="INCLUE MSCA network website (opens in new tab)"><img src="INCLUDE-logo-transparent.png" alt="INCLUE MSCA network logo"></a>
+                </div>
             </div>
         </div>
     </section>
@@ -406,90 +509,4 @@
                     <span class="role">Founder & Principal Scientist</span>
                     <h3>
                         Elena Bandini, PhD
-                        <a href="https://www.linkedin.com/in/elenabandini/?locale=en-US" target="_blank" class="founder-link-icon" aria-label="Elena Bandini LinkedIn">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                        </a>
-                    </h3>
-                    <p>Chemist with a foundation in analytical chemistry and chemoinformatics. Specialized in transforming laboratory logic into scalable computational solutions. With a PhD from Ghent University focused on ML pipelines for retention time prediction and chromatographic behavior, bridging the gap between raw chemical data and actionable structure-property insights.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-        <div class="container contact-wrapper">
-            <h2>Get in touch</h2>
-            <form id="contact-form" action="https://formsubmit.co/contact@chemcoreai.com" method="POST">
-                <!-- Data fields -->
-                <input type="text" name="name" placeholder="Full Name" required>
-                <input type="email" name="email" placeholder="name@company.com" required>
-                <textarea name="message" rows="4" placeholder="How can ChemCoreAI support your project?" required></textarea>
-                
-                <!-- Optimization fields -->
-                <input type="text" name="_honey" style="display:none">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_subject" value="New Inquiry from ChemCoreAI Website">
-                
-                <button type="submit" class="btn-minimal">Send Inquiry</button>
-            </form>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 ChemCoreAI. Based in Milan, Italy.</p>
-            
-            <div class="social-links">
-                <!-- Email -->
-                <a href="mailto:contact@chemcoreai.com" class="social-icon-link" aria-label="Email Us">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                </a>
-                
-                <!-- Company LinkedIn -->
-                <a href="https://www.linkedin.com/company/chemcoreai/" target="_blank" class="social-icon-link" aria-label="Company LinkedIn">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                </a>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        const sunIcon = document.querySelector('.sun-icon');
-        const moonIcon = document.querySelector('.moon-icon');
-        const body = document.body;
-
-        if (localStorage.getItem('theme') === 'light') enableLightMode();
-
-        themeToggleBtn.addEventListener('click', () => {
-            body.classList.contains('light-mode') ? disableLightMode() : enableLightMode();
-        });
-
-        function enableLightMode() {
-            body.classList.add('light-mode');
-            localStorage.setItem('theme', 'light');
-            sunIcon.style.display = 'none';
-            moonIcon.style.display = 'block';
-        }
-
-        function disableLightMode() {
-            body.classList.remove('light-mode');
-            localStorage.setItem('theme', 'dark');
-            sunIcon.style.display = 'block';
-            moonIcon.style.display = 'none';
-        }
-
-        // UPDATED: Click-only flip functionality
-        document.querySelectorAll('.flip-card-wrapper').forEach(card => {
-            card.addEventListener('click', function(e) {
-                // Prevent flip if clicking on a link inside the card
-                if (e.target.closest('a')) return;
-                
-                // Toggle the flipped class
-                this.classList.toggle('flipped');
-            });
-        });
-    </script>
-</body>
-</html>
+                        <a href="https://www.linkedin.com/in/elenabandini/?locale
