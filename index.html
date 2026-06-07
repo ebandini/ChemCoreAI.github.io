@@ -509,4 +509,90 @@
                     <span class="role">Founder & Principal Scientist</span>
                     <h3>
                         Elena Bandini, PhD
-                        <a href="https://www.linkedin.com/in/elenabandini/?locale
+                        <a href="https://www.linkedin.com/in/elenabandini/?locale=en-US" target="_blank" class="founder-link-icon" aria-label="Elena Bandini LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                        </a>
+                    </h3>
+                    <p>Chemist with a foundation in analytical chemistry and chemoinformatics. Specialized in transforming laboratory logic into scalable computational solutions. With a PhD from Ghent University focused on ML pipelines for retention time prediction and chromatographic behavior, bridging the gap between raw chemical data and actionable structure-property insights.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container contact-wrapper">
+            <h2>Get in touch</h2>
+            <form id="contact-form" action="https://formsubmit.co/contact@chemcoreai.com" method="POST">
+                <!-- Data fields -->
+                <input type="text" name="name" placeholder="Full Name" required>
+                <input type="email" name="email" placeholder="name@company.com" required>
+                <textarea name="message" rows="4" placeholder="How can ChemCoreAI support your project?" required></textarea>
+                
+                <!-- Optimization fields -->
+                <input type="text" name="_honey" style="display:none">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_subject" value="New Inquiry from ChemCoreAI Website">
+                
+                <button type="submit" class="btn-minimal">Send Inquiry</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 ChemCoreAI. Based in Milan, Italy.</p>
+            
+            <div class="social-links">
+                <!-- Email -->
+                <a href="mailto:contact@chemcoreai.com" class="social-icon-link" aria-label="Email Us">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </a>
+                
+                <!-- Company LinkedIn -->
+                <a href="https://www.linkedin.com/company/chemcoreai/" target="_blank" class="social-icon-link" aria-label="Company LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const sunIcon = document.querySelector('.sun-icon');
+        const moonIcon = document.querySelector('.moon-icon');
+        const body = document.body;
+
+        if (localStorage.getItem('theme') === 'light') enableLightMode();
+
+        themeToggleBtn.addEventListener('click', () => {
+            body.classList.contains('light-mode') ? disableLightMode() : enableLightMode();
+        });
+
+        function enableLightMode() {
+            body.classList.add('light-mode');
+            localStorage.setItem('theme', 'light');
+            sunIcon.style.display = 'none';
+            moonIcon.style.display = 'block';
+        }
+
+        function disableLightMode() {
+            body.classList.remove('light-mode');
+            localStorage.setItem('theme', 'dark');
+            sunIcon.style.display = 'block';
+            moonIcon.style.display = 'none';
+        }
+
+        // UPDATED: Click-only flip functionality
+        document.querySelectorAll('.flip-card-wrapper').forEach(card => {
+            card.addEventListener('click', function(e) {
+                // Prevent flip if clicking on a link inside the card
+                if (e.target.closest('a')) return;
+                
+                // Toggle the flipped class
+                this.classList.toggle('flipped');
+            });
+        });
+    </script>
+</body>
+</html>
