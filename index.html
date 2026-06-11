@@ -188,6 +188,7 @@
         .logo-chip img { height: 26px; width: auto; display: block; }
 
         .testimonial-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; max-width: 900px; margin: 0 auto 3.5rem; }
+        .testimonial-grid.single { grid-template-columns: 1fr; max-width: 720px; }
         .testimonial-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-card); padding: 2.5rem; backdrop-filter: blur(5px); display: flex; flex-direction: column; }
         .testimonial-card .quote-mark { font-family: Georgia, serif; font-size: 3rem; line-height: 0.6; height: 1.4rem; color: var(--accent-color); opacity: 0.55; }
         .testimonial-quote { font-size: 1.05rem; line-height: 1.6; color: var(--text-main); margin: 0 0 1.5rem; flex-grow: 1; }
@@ -466,25 +467,16 @@
             <h2>Testimonials</h2>
 
             <!--
-                TO ADD A REVIEW: replace the placeholder text below.
-                1) Put the quote inside <p class="testimonial-quote">…</p>
-                2) Fill in the name in <span class="testimonial-author">…</span>
-                3) Fill in role + organisation in <span class="testimonial-role">…</span>
-                4) Remove the word "placeholder" from class="testimonial-card placeholder"
-                Delete the second card if you only have one review.
+                TO ADD ANOTHER REVIEW: copy a full <div class="testimonial-card">…</div> block.
+                When you have 2 or more, remove "single" from <div class="testimonial-grid single">
+                so they display side by side.
             -->
-            <div class="testimonial-grid">
-                <div class="testimonial-card placeholder">
+            <div class="testimonial-grid single">
+                <div class="testimonial-card">
                     <span class="quote-mark">&ldquo;</span>
-                    <p class="testimonial-quote">Your first testimonial will appear here.</p>
-                    <span class="testimonial-author">Name</span>
-                    <span class="testimonial-role">Role, Organisation</span>
-                </div>
-                <div class="testimonial-card placeholder">
-                    <span class="quote-mark">&ldquo;</span>
-                    <p class="testimonial-quote">Your second testimonial will appear here.</p>
-                    <span class="testimonial-author">Name</span>
-                    <span class="testimonial-role">Role, Organisation</span>
+                    <p class="testimonial-quote">We organized an &ldquo;AI for Chemistry&rdquo; workshop by ChemCoreAI as part of the training for PhD students involved in our MSCA doctoral networks we coordinate. I also attended the workshop myself as a researcher and non-expert in AI and machine learning techniques. Elena found a good balance between providing sufficient background information for non-experts and avoiding too many technical details. The higher-level AI concepts were well documented and illustrated with interesting examples, making them easy to understand and applicable to other research domains. I left the workshop with many fresh ideas that I can apply to my own research. I highly recommend this training to anyone working with, or aiming to implement AI and machine learning techniques for experimentation and data treatment!</p>
+                    <span class="testimonial-author">Nick Sweygers</span>
+                    <span class="testimonial-role">Postdoctoral Research Fellow, KU Leuven</span>
                 </div>
             </div>
 
