@@ -474,6 +474,35 @@
                     </div>
                 </div>
 
+                <!-- CARD 5: Document Intelligence -->
+                <div class="flip-card-wrapper">
+                    <div class="flip-card-inner">
+                        <!-- FRONT -->
+                        <div class="flip-card-front">
+                            <h3>Secure Document Intelligence</h3>
+                            <p>An AI platform for querying confidential document archives such as regulatory dossiers, contracts, technical reports, with answers that stay verifiable, traceable, and fully inside your network.</p>
+
+                            <div class="flip-indicator">
+                                <span>Technical Details</span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8l4 4-4 4M8 12h8"/></svg>
+                            </div>
+                        </div>
+
+                        <!-- BACK -->
+                        <div class="flip-card-back">
+                            <h4>Implementation Specs</h4>
+                            <ul class="tech-list">
+                                <li>Data sovereignty: documents are indexed and queried by a local LLM, with no content ever leaving your infrastructure.</li>
+                                <li>Encryption: disk-level encryption (LUKS / AES-256), mutual-TLS between services, and vault-managed key rotation.</li>
+                                <li>Access control and traceability: role-based permissions (RBAC) with SSO and MFA, enforced per document collection, plus an immutable, audit trail.</li>
+                                <li>Input and stack integrity: Secure Boot / TPM verification, cryptographically signed updates, and document sanitization against prompt injection.</li>
+                                <li>Compliance by design: aligned with GDPR (verifiable right-to-erasure), NIS2, and ISO/IEC 27001.</li>
+                                <li>Scalable and modular: from a single GPU workstation to high-performance servers, with every component upgradable independently.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -517,7 +546,7 @@
             <!-- About the Founder -->
             <div class="founder-profile">
                 <div class="founder-info">
-                    <span class="role">Founder & Principal Scientist</span>
+                    <span class="role">Founder &amp; Principal Scientist</span>
                     <h3>
                         Elena Bandini, PhD
                         <a href="https://www.linkedin.com/in/elenabandini/?locale=en-US" target="_blank" class="founder-link-icon" aria-label="Elena Bandini LinkedIn">
